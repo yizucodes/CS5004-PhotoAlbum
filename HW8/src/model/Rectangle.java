@@ -12,11 +12,11 @@ public class Rectangle extends AbstractShape {
   public String toString() {
     return "Name: " + this.getName() + "\n"
             + "Type: " + this.getClass().getSimpleName().toLowerCase() + "\n"
-            + "Min corner: " + this.getPosition() + "\n"
+            + "Min corner: (" + this.getPosition().getX() + "," + this.getPosition().getY() + ")" + "\n"
             + "Width: " + this.getDimension1() + "\n"
             + "Height: " + this.getDimension2() + "\n"
             + "Color: (" + this.getColor().getRed() + "," + this.getColor().getGreen() + ","
-            + this.getColor().getBlue() + "," + "\n";
+            + this.getColor().getBlue() + ")" + "\n";
   }
 }
 
