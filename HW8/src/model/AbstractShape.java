@@ -93,12 +93,12 @@ public class AbstractShape implements IShape {
   // Will need to be overridden as Position, Dimension1 and Dimension2 have different names
   // depending on shape
   public String toString() {
-    return "Name: " + this.name + "\n"
+    return "Name: " + this.getName() + "\n"
             + "Type: " + this.getClass().getSimpleName().toLowerCase() + "\n"
-            + "Position: " + this.position.toString() + "\n"
-            + "Dimension1: " + this.dimension1 + "\n"
-            + "Dimension2: " + this.dimension2 + "\n"
-            + "Color: (" + this.color.getRed() + "," + this.color.getGreen() + ","
-            + this.color.getBlue() + "," + "\n";
+            + "Position: (" + this.getPosition().getX() + "," + this.getPosition().getY() + ")" + "\n"
+            + "Dimension1: " + this.getDimension1() + "\n"
+            + "Dimension2: " + this.getDimension2() + "\n"
+            + "Color: (" + this.getColor().getRed() + "," + this.getColor().getGreen() + ","
+            + this.getColor().getBlue() + ")" + "\n";
   }
 }
