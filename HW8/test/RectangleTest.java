@@ -2,7 +2,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.geom.Point2D;
 
 import model.Rectangle;
