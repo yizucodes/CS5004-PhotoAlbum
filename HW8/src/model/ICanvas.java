@@ -11,13 +11,16 @@ public interface ICanvas {
 
   public IShape getShape(String shapeId) throws IllegalArgumentException;
 
-  public IShape createShape(IShape shape);
+  public IShape createShape(IShape shape) throws IllegalArgumentException;;
   public String toString();
 
-  public IShape move(IShape shape, Point2D targetPosition);
+  public IShape move(IShape shape, Point2D targetPosition)
+          throws IllegalArgumentException;
 
-  public IShape changeColor(IShape shape, Color targetColor);
+  public IShape changeColor(IShape shape, Color targetColor)
+          throws IllegalArgumentException;;
 
-  public IShape scale(IShape shape, double targetWidth, double targetHeight);
+  public IShape scale(IShape shape, double targetWidth, double targetHeight)
+          throws IllegalArgumentException;
 
 }

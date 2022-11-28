@@ -63,17 +63,20 @@ public class CanvasImpl implements ICanvas {
   }
 
   @Override
-  public IShape move(IShape shape, Point2D targetPosition) {
+  public IShape move(IShape shape, Point2D targetPosition)
+          throws IllegalArgumentException {
     return null;
   }
 
   @Override
-  public IShape changeColor(IShape shape, Color targetColor) {
+  public IShape changeColor(IShape shape, Color targetColor)
+          throws IllegalArgumentException {
     return null;
   }
 
   @Override
-  public IShape scale(IShape shape, double targetWidth, double targetHeight) {
+  public IShape scale(IShape shape, double targetWidth, double targetHeight)
+          throws IllegalArgumentException {
     return null;
   }
 }
