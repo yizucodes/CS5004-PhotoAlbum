@@ -49,6 +49,7 @@ public class AbstractShape implements IShape {
     this.color = color;
   }
 
+
   /**
    * Check for id.
    *
@@ -204,7 +205,12 @@ public class AbstractShape implements IShape {
   public void setColor(Color color) {
     isValidColor(color);
     this.color = color;
-    
+  }
+
+  // Will be overriden at concrete-class level.
+  @Override
+  public IShape copy() {
+    return null;
   }
 
   // Will need to be overridden as Position, Dimension1 and Dimension2 have different names

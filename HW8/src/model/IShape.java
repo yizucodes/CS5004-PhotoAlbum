@@ -21,6 +21,7 @@ public interface IShape {
 
   public Color getColor();
   public void setColor(Color color);
+  public IShape copy();
 
   public String toString();
 }
