@@ -67,4 +67,14 @@ public class CanvasImpl implements ICanvas {
           throws IllegalArgumentException {
     return null;
   }
+
+  @Override
+  public void removeCanvas() {
+//    this = null;
+  }
+  @Override
+  public void removeShape(String id) {
+
+  }
+
 }
