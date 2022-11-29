@@ -263,6 +263,34 @@ public class RectangleTest {
     assertEquals(new Point2D.Double(0, 0), rect1.getPosition());
   }
 
+
+  /**
+   * Test setMinCorner method.
+   */
+  @Test
+  public void testSetMinCorner() {
+    rect1.setPosition(new Point2D.Double(1, 1));
+    assertEquals(new Point2D.Double(1, 1), rect1.getPosition());
+  }
+
+  /**
+   * Test for IllegalArgumentException for invalid min corner values.
+   */
+  @Test
+  public void testBadSetMinCorner() {
+
+    int illegalTestsPassed = 0;
+
+    try {
+      rect1.setPosition(new Point2D.Double(-10, -10));
+    }
+    catch (IllegalArgumentException e) {
+      illegalTestsPassed += 1;
+    }
+
+    assertEquals(1, illegalTestsPassed);
+  }
+
   /**
    * Test getWidth method.
    */
@@ -272,11 +300,75 @@ public class RectangleTest {
   }
 
   /**
-   * Test getHeight method.
+   * Test setWidth method.
    */
+  @Test
+  public void testSetWidth() {
+    rect1.setDimension1(5);
+    assertEquals(5, rect1.getDimension1(), 0.001);
+  }
+
+  /**
+   * Test for IllegalArgumentException for invalid width.
+   */
+  @Test
+  public void testBadSetWidth() {
+
+    int illegalTestsPassed = 0;
+
+    try {
+      rect1.setDimension1(0);
+    } catch (IllegalArgumentException e) {
+      illegalTestsPassed += 1;
+    }
+    try {
+      rect1.setDimension1(-110);
+    } catch (IllegalArgumentException e) {
+      illegalTestsPassed += 1;
+    }
+
+    assertEquals(2, illegalTestsPassed);
+  }
+
+    /**
+     * Test getHeight method.
+     */
   @Test
   public void testGetHeight() {
     assertEquals(2, rect1.getDimension2(), 0.001);
+  }
+
+  /**
+   * Test setWidth method.
+   */
+  @Test
+  public void testSetHeight() {
+    rect1.setDimension2(100);
+    assertEquals(100, rect1.getDimension2(), 0.001);
+  }
+
+  /**
+   * Test for IllegalArgumentException for invalid height.
+   */
+  @Test
+  public void testBadSetHeight() {
+
+    int illegalTestsPassed = 0;
+
+    try {
+      rect1.setDimension2(0);
+    }
+    catch (IllegalArgumentException e) {
+      illegalTestsPassed += 1;
+    }
+    try {
+      rect1.setDimension2(-110);
+    }
+    catch (IllegalArgumentException e) {
+      illegalTestsPassed += 1;
+    }
+
+    assertEquals(2, illegalTestsPassed);
   }
 
   /**
