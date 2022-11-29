@@ -33,23 +33,76 @@ public class AbstractShape implements IShape {
   public AbstractShape(String id, String name, Point2D position, double dimension1, double dimension2,
                    Color color) throws IllegalArgumentException {
 
+    isValidId(id);
+    isValidName(name);
+    isValidPosition(position);
+    isValidDimension(dimension1);
+    isValidDimension(dimension2);
+    isValidColor(color);
 
+    this.id = id;
+    this.name = name;
+    this.position = position;
+
+    this.dimension1 = dimension1;
+    this.dimension2 = dimension2;
+    this.color = color;
+  }
+
+  /**
+   * Check for id.
+   *
+   * @return boolean true if valid
+   */
+  private static boolean isValidId(String id) throws IllegalArgumentException {
     if (id == null || id.equals("")) {
       throw new IllegalArgumentException("Id cannot be null or empty string");
     }
+    return true;
+  }
 
+  /**
+   * Check for name.
+   *
+   * @return boolean true if valid
+   */
+  private static boolean isValidName(String name) throws IllegalArgumentException {
     if (name == null || name.equals("")) {
       throw new IllegalArgumentException("Name cannot be null or empty string");
     }
+    return true;
+  }
 
+  /**
+   * Check for position.
+   *
+   * @return boolean true if valid
+   */
+  private static boolean isValidPosition(Point2D position) throws IllegalArgumentException {
     if (position.getX() < 0 || position.getY() < 0) {
       throw new IllegalArgumentException("X and/or Y value cannot be lower than 0");
     }
+    return true;
+  }
 
-    if (dimension1 < 0 || dimension2 < 0) {
-      throw new IllegalArgumentException("Width or dimension2 cannot be lower than 0");
+  /**
+   * Check for dimension.
+   *
+   * @return boolean true if valid
+   */
+  private static boolean isValidDimension(double dim) throws IllegalArgumentException {
+    if (dim <= 0) {
+      throw new IllegalArgumentException("Dimension cannot be 0 or lower");
     }
+    return true;
+  }
 
+  /**
+   * Check for color.
+   *
+   * @return boolean true if valid
+   */
+  private static boolean isValidColor(Color color) throws IllegalArgumentException {
     if (color.getRed() < MIN_COLOR_VAL || color.getRed() > MAX_COLOR_VAL) {
       throw new IllegalArgumentException("Red color cannot be lower than " + MIN_COLOR_VAL
               + " or greater than " + MAX_COLOR_VAL);
@@ -65,13 +118,7 @@ public class AbstractShape implements IShape {
               + " or greater than " + MAX_COLOR_VAL);
     }
 
-    this.id = id;
-    this.name = name;
-    this.position = position;
-
-    this.dimension1 = dimension1;
-    this.dimension2 = dimension2;
-    this.color = color;
+    return true;
   }
 
   /**
