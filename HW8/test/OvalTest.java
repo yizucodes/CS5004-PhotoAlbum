@@ -2,10 +2,13 @@ import org.junit.Test;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.util.Objects;
 
 import model.Oval;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test class for the Oval class.
@@ -244,7 +247,6 @@ public class OvalTest {
     assertEquals("1", oval1.getId());
   }
 
-
   /**
    * Test getName method.
    */
@@ -262,19 +264,113 @@ public class OvalTest {
   }
 
   /**
-   * Test getWidth method.
+   * Test setCenter method.
    */
   @Test
-  public void testGetWidth() {
-    assertEquals(2, oval1.getDimension1(), 0.001);
+  public void testSetCenter() {
+    oval1.setPosition(new Point2D.Double(1, 1));
+    assertEquals(new Point2D.Double(1, 1), oval1.getPosition());
   }
 
   /**
-   * Test getHeight method.
+   * Test for IllegalArgumentException for invalid center values.
+   */
+  @Test
+  public void testBadSetCenter() {
+
+    int illegalTestsPassed = 0;
+
+    try {
+      oval1.setPosition(new Point2D.Double(-10, -10));
+    }
+    catch (IllegalArgumentException e) {
+      illegalTestsPassed += 1;
+    }
+
+    assertEquals(1, illegalTestsPassed);
+  }
+
+  /**
+   * Test getXRadius method via abstract class' getDimension1.
+   */
+  @Test
+  public void testGetXRadius() {
+    assertEquals(2, oval1.getDimension1(), 0.001);
+  }
+
+
+  /**
+   * Test setXRadius method via abstract class' setDimension1.
+   */
+  @Test
+  public void testSetXRadius() {
+    oval1.setDimension1(5);
+    assertEquals(5, oval1.getDimension1(), 0.001);
+  }
+
+  /**
+   * Test for IllegalArgumentException for invalid x radius.
+   */
+  @Test
+  public void testBadXRadius() {
+
+    int illegalTestsPassed = 0;
+
+    try {
+      oval1.setDimension1(0);
+    }
+    catch (IllegalArgumentException e) {
+      illegalTestsPassed += 1;
+    }
+    try {
+      oval1.setDimension1(-110);
+    }
+    catch (IllegalArgumentException e) {
+      illegalTestsPassed += 1;
+    }
+
+    assertEquals(2, illegalTestsPassed);
+  }
+
+  /**
+   * Test getYRadius method via abstract class' getDimension2.
    */
   @Test
   public void testGetHeight() {
     assertEquals(2, oval1.getDimension2(), 0.001);
+  }
+
+  /**
+   * Test setYRadius method via abstract class' setDimension2.
+   */
+  @Test
+  public void testSetYRadius() {
+    oval1.setDimension2(100);
+    assertEquals(100, oval1.getDimension2(), 0.001);
+  }
+
+  /**
+   * Test for IllegalArgumentException for invalid height.
+   */
+  @Test
+  public void testBadSetYRadius() {
+
+    int illegalTestsPassed = 0;
+
+    try {
+      oval1.setDimension2(0);
+    }
+    catch (IllegalArgumentException e) {
+      illegalTestsPassed += 1;
+    }
+    try {
+      oval1.setDimension2(-110);
+    }
+    catch (IllegalArgumentException e) {
+      illegalTestsPassed += 1;
+    }
+
+    assertEquals(2, illegalTestsPassed);
   }
 
   /**
@@ -283,6 +379,39 @@ public class OvalTest {
   @Test
   public void testGetColor() {
     assertEquals(new Color(1,1,1), oval1.getColor());
+  }
+
+  /**
+   * Test setColor method.
+   */
+  @Test
+  public void testSetColor() {
+    oval1.setColor(new Color(2,2,2));
+    assertEquals(new Color(2,2,2), oval1.getColor());
+  }
+
+  /**
+   * Test for IllegalArgumentException for invalid color values.
+   */
+  @Test
+  public void testBadSetColor() {
+
+    int illegalTestsPassed = 0;
+
+    try {
+      oval1.setColor(new Color(-2,-2,-2));
+    }
+    catch (IllegalArgumentException e) {
+      illegalTestsPassed += 1;
+    }
+    try {
+      oval1.setColor(new Color(300,300,300));
+    }
+    catch (IllegalArgumentException e) {
+      illegalTestsPassed += 1;
+    }
+
+    assertEquals(2, illegalTestsPassed);
   }
 
   /**
