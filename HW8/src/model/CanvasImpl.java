@@ -36,29 +36,17 @@ public class CanvasImpl implements ICanvas {
   }
 
   @Override
-  public IShape createShape(IShape shape) throws IllegalArgumentException{
+  public IShape createShape(String id, String name, Point2D position,
+                            double dimension1, double dimension2, Color color, String shapeType) throws IllegalArgumentException {
 
-    if (shape == null) {
-      throw new IllegalArgumentException("Shape cannot be null");
+    if (shapeType.equalsIgnoreCase("rectangle")) {
+      return new Rectangle(id, name, position, dimension1, dimension2, color);
     }
-
-    String shapeName = shape.getClass().getName();
-    String id = shape.getId();
-    String name = shape.getName();
-    Point2D position = shape.getPosition();
-    double dim1 = shape.getDimension1();
-    double dim2 = shape.getDimension2();
-    Color color = shape.getColor();
-
-    switch (shapeName) {
-      case "Rectangle":
-        new Rectangle(id, name, position, dim1, dim2, color);
-
-      case "Oval":
-        new Oval(id, name, position, dim1, dim2, color);
-
-      default:
-        throw new IllegalArgumentException(shape + " does not exist");
+    else if(shapeType.equalsIgnoreCase("oval")) {
+      return new Oval(id, name, position, dimension1, dimension2, color);
+    }
+    else {
+      throw new IllegalArgumentException(shapeType + " does not exist");
     }
   }
 
