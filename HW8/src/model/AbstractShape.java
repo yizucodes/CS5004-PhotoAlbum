@@ -152,6 +152,12 @@ public class AbstractShape implements IShape {
     return this.position;
   }
 
+  @Override
+  public void setPosition(Point2D pos) {
+    isValidPosition(pos);
+    this.position = pos;
+  }
+
   /**
    * Gets first dimension of shape.
    *
@@ -160,6 +166,12 @@ public class AbstractShape implements IShape {
   @Override
   public double getDimension1() {
     return this.dimension1;
+  }
+
+  @Override
+  public void setDimension1(double dim1) {
+    isValidDimension(dim1);
+    this.dimension1 = dim1;
   }
 
   /**
@@ -172,6 +184,12 @@ public class AbstractShape implements IShape {
     return this.dimension2;
   }
 
+  @Override
+  public void setDimension2(double dim2) {
+    isValidDimension(dim2);
+    this.dimension2 = dim2;
+  }
+
   /**
    * Gets color of shape.
    *
@@ -180,6 +198,13 @@ public class AbstractShape implements IShape {
   @Override
   public Color getColor() {
     return this.color;
+  }
+
+  @Override
+  public void setColor(Color color) {
+    isValidColor(color);
+    this.color = color;
+    
   }
 
   // Will need to be overridden as Position, Dimension1 and Dimension2 have different names
