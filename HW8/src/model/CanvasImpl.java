@@ -89,6 +89,42 @@ public class CanvasImpl implements ICanvas {
   }
 
   /**
+   * Add shape to list. Prevent from adding a shape with same id values as ids are unique to each shape.
+   *
+   */
+  @Override
+  public void addShape(IShape shape) throws IllegalArgumentException {
+
+    if (shape == null) {
+      throw new IllegalArgumentException("Shape cannot be null");
+    }
+
+    String shapeId = shape.getId();
+
+    for (int index = 0; index < this.shapeList.size(); index++) {
+      String targetId = this.shapeList.get(index).getId();
+      if (Objects.equals(shapeId, targetId)) {
+        throw new IllegalArgumentException(shapeId + " already exists in the list of shapes.");
+      }
+    }
+
+    this.shapeList.add(shape);
+  }
+
+  /**
+   * Remove a shape from canvas.
+   *
+   */
+  @Override
+  public void removeShape(String id) {
+    if (id == null || id.equals("")) {
+      throw new IllegalArgumentException("Id cannot be null or empty string.");
+    }
+
+    this.shapeList.remove(getShape(id));
+  }
+
+  /**
    * Moves a shape to a target position.
    *
    */
