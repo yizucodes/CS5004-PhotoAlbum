@@ -33,7 +33,7 @@ public interface ISnapshot {
    */
   public ICanvas getCanvas();
   /**
-   * Print out string version of canvas with its values.
+   * Print out string version of snapshot with its values.
    *
    * @return String
    */
