@@ -49,7 +49,11 @@ public class CanvasImpl implements ICanvas {
    * @return IShape
    */
   @Override
-  public IShape getShape(String shapeId) {
+  public IShape getShape(String shapeId) throws IllegalArgumentException {
+
+    if (shapeId == null || shapeId.equals("")) {
+      throw new IllegalArgumentException("Invalid shape id");
+    }
 
     IShape result = null;
 
