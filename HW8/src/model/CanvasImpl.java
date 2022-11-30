@@ -150,11 +150,11 @@ public class CanvasImpl implements ICanvas {
    *
    */
   @Override
-  public void scale(IShape shape, double targetWidth, double targetHeight)
+  public void scale(IShape shape, double dimension1, double dimension2)
           throws IllegalArgumentException {
 
-    shape.setDimension1(targetWidth);
-    shape.setDimension2(targetHeight);
+    shape.setDimension1(dimension1);
+    shape.setDimension2(dimension2);
   }
 
   /**
