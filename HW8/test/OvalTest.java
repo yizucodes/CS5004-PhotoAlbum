@@ -413,6 +413,22 @@ public class OvalTest {
 
     assertEquals(2, illegalTestsPassed);
   }
+//
+//  /**
+//   * Test copy method and protected setter methods.
+//   */
+//  @Test
+//  public void testCopy() {
+//    Oval test = new Oval("1", "test", new Point2D.Double(0, 0),
+//            2, 2, new Color(1,1,1));
+//    Oval copyTest = test.copy();
+//    Oval copyOval1 = oval1.copy();
+//    assertTrue(Objects.deepEquals(copyTest, test));
+////    assertTrue(Objects.deepEquals(copyOval1, oval1));
+//
+//    assertFalse(Objects.deepEquals(oval2, copyOval1));
+//  }
+
 
   /**
    * Test toString method.

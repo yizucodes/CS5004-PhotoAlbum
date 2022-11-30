@@ -207,11 +207,11 @@ public class AbstractShape implements IShape {
     this.color = color;
   }
 
-  // Will be overriden at concrete-class level.
-  @Override
-  public IShape copy() {
-    return null;
-  }
+//  // Will be overriden at concrete-class level.
+//  @Override
+//  public IShape copy() {
+//    return null;
+//  }
 
   // Will need to be overridden as Position, Dimension1 and Dimension2 have different names
   // depending on shape
