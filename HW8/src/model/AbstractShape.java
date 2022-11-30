@@ -2,6 +2,7 @@ package model;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
+import java.util.Objects;
 
 /**
  * Abstract class to represent a 2D shape.
@@ -228,5 +229,17 @@ public class AbstractShape implements IShape {
             + "Dimension2: " + this.getDimension2() + "\n"
             + "Color: (" + this.getColor().getRed() + "," + this.getColor().getGreen() + ","
             + this.getColor().getBlue() + ")" + "\n";
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof AbstractShape that)) return false;
+    return Double.compare(that.getDimension1(), getDimension1()) == 0 && Double.compare(that.getDimension2(), getDimension2()) == 0 && Objects.equals(getId(), that.getId()) && Objects.equals(getName(), that.getName()) && Objects.equals(getPosition(), that.getPosition()) && Objects.equals(getColor(), that.getColor());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getId(), getName(), getPosition(), getDimension1(), getDimension2(), getColor());
   }
 }
