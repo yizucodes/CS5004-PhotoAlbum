@@ -59,6 +59,7 @@ public class CanvasImpl implements ICanvas {
 
     for (int index = 0; index < this.shapeList.size(); index++) {
       String targetId = this.shapeList.get(index).getId();
+
       if (Objects.equals(shapeId, targetId)) {
         result = this.shapeList.get(index);
         break;
@@ -126,6 +127,8 @@ public class CanvasImpl implements ICanvas {
 
   /**
    * Moves a shape to a target position.
+   * Shapes can overlap each other so if there is an existing shape
+   * at the coordinates of targetPosition, that is allowed.
    *
    */
   @Override
