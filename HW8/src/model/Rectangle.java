@@ -23,7 +23,9 @@ public class Rectangle extends AbstractShape {
   }
 
   /**
-   * Print out string version of rectangle with its values.
+   *
+   * Print out string version of rectangle with its values. For rectangle, position is min corner which is bottom left corner of the shape,
+   * dimension 1 is width, dimension 2 is height.
    *
    * @return String
    */

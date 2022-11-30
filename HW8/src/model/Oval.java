@@ -23,13 +23,14 @@ public class Oval extends AbstractShape {
   }
 
   /**
-   * Print out string version of oval with its values.
+   * Print out string version of oval with its values. For oval, position is center,
+   * dimension 1 is X radius, dimension 2 is Y radius.
    *
    * @return String
    */
   @Override
   public String toString() {
-    return "Name: " + this.getName() + "\n"
+    return  "Name: " + this.getName() + "\n"
             + "Type: " + this.getClass().getSimpleName().toLowerCase() + "\n"
             + "Center: (" + this.getPosition().getX() + "," + this.getPosition().getY() + ")" + "\n"
             + "X radius: " + this.getDimension1() + "\n"
