@@ -166,13 +166,10 @@ public class CanvasImpl implements ICanvas {
     this.shapeList = new ArrayList<IShape>();
   }
 
-  /**
-   * Remove a shape from canvas.
-   *
-   */
   @Override
-  public void removeShape(String id) {
-    this.shapeList.remove(getShape(id));
+  public String toString() {
+    return "Printing Canvas" + '\n' +
+    "Canvas id: " + id + '\n' +
+            "List of shapes : " + shapeList + '\n';
   }
-
 }
