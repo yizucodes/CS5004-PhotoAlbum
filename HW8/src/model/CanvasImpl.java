@@ -131,6 +131,8 @@ public class CanvasImpl implements ICanvas {
   @Override
   public void move(IShape shape, Point2D targetPosition)
           throws IllegalArgumentException {
+
+    shape.setPosition(targetPosition);
   }
 
   /**
