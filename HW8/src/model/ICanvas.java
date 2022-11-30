@@ -37,6 +37,13 @@ public interface ICanvas {
    */
   public IShape createShape(String id, String name, Point2D position,
                             double dimension1, double position2, Color color, String shapeType) throws IllegalArgumentException;
+
+  /**
+   * Add shape to list.
+   *
+   */
+  public void addShape(IShape shape);
+
   /**
    * Remove canvas.
    *
