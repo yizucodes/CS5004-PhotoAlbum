@@ -9,6 +9,14 @@ public class CanvasImpl implements ICanvas {
   private String id;
   private ArrayList<IShape> shapeList;
 
+  public CanvasImpl(String id) throws IllegalArgumentException {
+    if (id == null || id.equals("")) {
+      throw new IllegalArgumentException("Id cannot be null or empty string.");
+    }
+    this.id = id;
+    this.shapeList = new ArrayList<IShape>();
+  }
+
   @Override
   public String getId() {
     return this.id;
