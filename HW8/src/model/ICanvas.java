@@ -17,11 +17,18 @@ public interface ICanvas {
   public String getId();
 
   /**
-   * Get id the list of shapes.
+   * Get list of shapes.
    *
    * @return ArrayList<IShape>
    */
   public ArrayList<IShape> getShapeList();
+
+
+  /**
+   * Set list of shapes to empty.
+   *
+   */
+  public void resetShapeList();
 
   /**
    * Get shape.
@@ -43,12 +50,6 @@ public interface ICanvas {
    *
    */
   public void addShape(IShape shape);
-
-  /**
-   * Remove canvas.
-   *
-   */
-  public void removeCanvas();
 
   /**
    * Remove a shape from canvas.

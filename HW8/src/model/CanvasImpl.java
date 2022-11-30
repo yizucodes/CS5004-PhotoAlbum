@@ -44,6 +44,15 @@ public class CanvasImpl implements ICanvas {
   }
 
   /**
+   * Set list of shapes to empty.
+   *
+   */
+  @Override
+  public void resetShapeList() {
+    this.shapeList = new ArrayList<IShape>();
+  }
+
+  /**
    * Get shape.
    *
    * @return IShape
@@ -158,15 +167,6 @@ public class CanvasImpl implements ICanvas {
 
     shape.setDimension1(dimension1);
     shape.setDimension2(dimension2);
-  }
-
-  /**
-   * Remove canvas.
-   *
-   */
-  @Override
-  public void removeCanvas() {
-    this.shapeList = new ArrayList<IShape>();
   }
 
   @Override

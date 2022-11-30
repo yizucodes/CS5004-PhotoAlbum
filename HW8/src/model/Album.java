@@ -6,9 +6,11 @@ import java.util.Objects;
 public class Album {
   private String id;
   private ArrayList<ISnapshot> snapshotList;
+  private ICanvas canvas;
 
   public Album() {
     this.snapshotList = new ArrayList<ISnapshot>();
+    this.canvas = null;
   }
 
   // TODO
@@ -35,7 +37,21 @@ public class Album {
   }
 
   public ICanvas createCanvas(String canvasId) {
-    return new CanvasImpl(canvasId);
+    ICanvas currCanvas = new CanvasImpl(canvasId);
+    this.canvas = currCanvas;
+    return currCanvas;
+  };
+
+  public ICanvas getCanvas() {
+    return this.canvas;
+  }
+
+  /**
+   * Remove canvas.
+   *
+   */
+  public void removeCanvas() {
+    this.getCanvas().resetShapeList();
   };
 
   public void removeAlbum() {
@@ -45,7 +61,6 @@ public class Album {
   public void removeSnapshot(String id) {
     this.snapshotList.remove(getSnapshot(id));
   }
-
 
 
 }
