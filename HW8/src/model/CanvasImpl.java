@@ -59,30 +59,31 @@ public class CanvasImpl implements ICanvas {
   }
 
   @Override
-  public IShape move(IShape shape, Point2D targetPosition)
+  public void move(IShape shape, Point2D targetPosition)
           throws IllegalArgumentException {
-    return null;
   }
 
   @Override
-  public IShape changeColor(IShape shape, Color targetColor)
+  public void changeColor(IShape shape, Color targetColor)
           throws IllegalArgumentException {
-    return null;
+    shape.setColor(targetColor);
   }
 
   @Override
-  public IShape scale(IShape shape, double targetWidth, double targetHeight)
+  public void scale(IShape shape, double targetWidth, double targetHeight)
           throws IllegalArgumentException {
-    return null;
+
+    shape.setDimension1(targetWidth);
+    shape.setDimension2(targetHeight);
   }
 
   @Override
   public void removeCanvas() {
-//    this = null;
+    this.shapeList = new ArrayList<IShape>();
   }
   @Override
   public void removeShape(String id) {
-
+    this.shapeList.remove(getShape(id));
   }
 
 }
