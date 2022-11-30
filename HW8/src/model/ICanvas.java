@@ -20,13 +20,13 @@ public interface ICanvas {
 
   public void removeShape(String id);
 
-  public IShape move(IShape shape, Point2D targetPosition)
+  public void move(IShape shape, Point2D targetPosition)
           throws IllegalArgumentException;
 
-  public IShape changeColor(IShape shape, Color targetColor)
+  public void changeColor(IShape shape, Color targetColor)
           throws IllegalArgumentException;;
 
-  public IShape scale(IShape shape, double targetWidth, double targetHeight)
+  public void scale(IShape shape, double targetWidth, double targetHeight)
           throws IllegalArgumentException;
 
   public String toString();
