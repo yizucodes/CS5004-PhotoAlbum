@@ -53,6 +53,16 @@ public class CanvasImpl implements ICanvas {
   }
 
   /**
+   * Set list of shapes to passed list.
+   *
+   * @param shapeList
+   */
+  @Override
+  public void setShapeList(ArrayList<IShape> shapeList) {
+    this.shapeList = shapeList;
+  }
+
+  /**
    * Get shape.
    *
    * @return IShape

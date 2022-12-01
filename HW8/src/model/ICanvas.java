@@ -31,6 +31,12 @@ public interface ICanvas {
   public void resetShapeList();
 
   /**
+   * Set list of shapes to passed list.
+   *
+   */
+  public void setShapeList(ArrayList<IShape> shapeList);
+
+  /**
    * Get shape.
    *
    * @return IShape
