@@ -12,12 +12,24 @@ public interface ISnapshot {
    * @return String id
    */
   public String getId();
+
+  /**
+   * Set id of snapshot.
+   *
+   */
+  public void setId(String id);
   /**
    * Get timestamp of snapshot.
    *
    * @return Timestamp timestamp
    */
-  public Timestamp getTimestamp();
+  public String getTimestamp();
+
+  /**
+   * Set timestamp of snapshot.
+   *
+   */
+  public void setTimestamp(String ts);
 
   /**
    * Get description of snapshot.

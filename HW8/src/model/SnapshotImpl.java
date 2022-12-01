@@ -1,57 +1,83 @@
 package model;
 
+import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 
-public class SnapshotImpl {
+public class SnapshotImpl implements ISnapshot {
+
+  private static final String TIMESTAMP_FORMAT = "yyyy-MM-dd HH:mm:ss";
+  private static final String TIMESTAMP_ID_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS";
   private String id; // Format of timestamp, example: 2022-03-30T11:51:02.174193
-  private Timestamp timestamp;
+  private String timestamp;
   private String description;
-  private ArrayList<IShape> shapeList;
 
-  public SnapshotImpl(String id, Timestamp timestamp, String description, ArrayList<IShape> shapeList) throws IllegalArgumentException {
-    if (id == null || id.equals("")) {
-      throw new IllegalArgumentException("Id cannot be null or empty string");
+  private ICanvas canvas;
+
+  public SnapshotImpl(String description, ICanvas canvas) throws IllegalArgumentException {
+
+    if (description == null) {
+      throw new IllegalArgumentException("Description cannot be null");
     }
 
-    if (description == null || description.equals("")) {
-      throw new IllegalArgumentException("Description cannot be null or empty string");
+    if (canvas == null) {
+      throw new IllegalArgumentException("Canvas cannot be null");
     }
 
-    if (timestamp == null) {
-      throw new IllegalArgumentException("Timestamp cannot be null");
-    }
+    Timestamp currTimestamp = new Timestamp(System.currentTimeMillis());
 
-    if (shapeList == null) {
-      throw new IllegalArgumentException("List of shapes cannot be null");
-    }
-
-
-    // TODO: Checking whether to validate timestamp for format?
-
-    this.id = id;
-    this.timestamp = timestamp;
+    this.id = new SimpleDateFormat(TIMESTAMP_ID_FORMAT).format(currTimestamp);
+    this.timestamp = new SimpleDateFormat(TIMESTAMP_FORMAT).format(currTimestamp);
     this.description = description;
-    this.shapeList = shapeList;
+    this.canvas = canvas;
 
   }
 
+  // For testing purposes as the timestamp changes which marks the assertEquals method wrong.
   public String getId() {
     return this.id;
   }
 
-  public Timestamp getTimestamp() {
+  /**
+   * Set id of snapshot.
+   *
+   * @param id
+   */
+  @Override
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  // For testing purposes as the timestamp changes which marks the assertEquals method wrong.
+  public String getTimestamp() {
     return this.timestamp;
   }
+
+  /**
+   * Set timestamp of snapshot.
+   *
+   * @param ts
+   */
+  @Override
+  public void setTimestamp(String ts) {
+    this.timestamp = timestamp;
+  }
+
 
   public String getDescription() {
     return this.description;
   }
 
-  public ArrayList<IShape> getShapeList() {
-    return this.shapeList;
+  @Override
+  public ICanvas getCanvas() {
+    return this.canvas;
   }
 
+  /**
+   * Print out string version of snapshot with its contained shapes.
+   *
+   * @return String
+   */
   @Override
   public String toString() {
     return "Printing Snapshots\n"
@@ -59,6 +85,6 @@ public class SnapshotImpl {
             + "Timestamp: " + this.timestamp + '\n'
             + "Description: " + this.description + '\n'
             + "Shape Information\n"
-            +  shapeList + "\n";
+            +  this.canvas.getShapeList() + "\n";
   }
 }
