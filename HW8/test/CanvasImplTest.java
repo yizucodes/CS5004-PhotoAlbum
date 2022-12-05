@@ -63,16 +63,6 @@ public class CanvasImplTest {
   }
 
   /**
-   * Test resetShapeList.
-   */
-  @org.junit.Test
-  public void testResetShapeList() {
-    canvas1.resetShapeList();
-
-    assertEquals("[]", canvas1.getShapeList().toString());
-  }
-
-  /**
    * Test getShape.
    */
   @org.junit.Test
