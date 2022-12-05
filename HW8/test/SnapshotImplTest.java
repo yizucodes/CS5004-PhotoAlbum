@@ -13,7 +13,7 @@ import model.IShape;
 import model.ISnapshot;
 
 /**
- * JUnit test class for the Album class.
+ * JUnit test class for the SnapshotImpl class.
  */
 public class SnapshotImplTest {
 
@@ -136,5 +136,5 @@ public class SnapshotImplTest {
             "]\n", canvas1snap.toString());
 
   }
-  
+
 }

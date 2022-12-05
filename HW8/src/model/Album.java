@@ -1,15 +1,20 @@
 package model;
 
-import java.awt.*;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Objects;
 
+
+/**
+ * Class representing an album of snapshots.
+ */
 public class Album {
-  private String id;
   private ArrayList<ISnapshot> snapshotList;
   private ICanvas canvas;
 
+  /**
+   * Constructor for Album.
+   *
+   */
   public Album() {
     this.snapshotList = new ArrayList<ISnapshot>();
     this.canvas = null;
@@ -33,11 +38,25 @@ public class Album {
     return newSnap;
   };
 
+  /**
+   * Get list of snapshots.
+   *
+   * @return ArrayList<ISnapshot>
+   */
   public ArrayList<ISnapshot> getSnapshotList() {
     return this.snapshotList;
   }
 
-  public ISnapshot getSnapshot(String id) {
+  /**
+   * Get snapshot based on its id.
+   *
+   * @return ISnapshot
+   */
+  public ISnapshot getSnapshot(String id) throws IllegalArgumentException {
+    if (id == null || id.equals("")) {
+      throw new IllegalArgumentException("Invalid shape id");
+    }
+
     ISnapshot result = null;
 
     for (int index = 0; index < this.snapshotList.size(); index++) {
@@ -47,16 +66,29 @@ public class Album {
         break;
       }
     }
-
     return result;
   }
 
-  public ICanvas createCanvas(String canvasId) {
+  /**
+   * Create a canvas with an id.
+   *
+   * @return ICanvas
+   */
+  public ICanvas createCanvas(String canvasId) throws IllegalArgumentException {
+    if (canvasId == null || canvasId.equals("")) {
+      throw new IllegalArgumentException("Id cannot be null or empty");
+    };
+
     ICanvas currCanvas = new CanvasImpl(canvasId);
     this.canvas = currCanvas;
     return currCanvas;
   };
 
+  /**
+   * Get canvas.
+   *
+   * @return ICanvas
+   */
   public ICanvas getCanvas() {
     return this.canvas;
   }
@@ -66,16 +98,33 @@ public class Album {
    *
    */
   public void removeCanvas() {
-    this.getCanvas().resetShapeList();
+    this.getCanvas().setShapeList(new ArrayList<>());
   };
 
+  /**
+   * Remove album.
+   *
+   */
   public void removeAlbum() {
     this.snapshotList = new ArrayList<ISnapshot>();
   }
 
+  /**
+   * Remove snapshot based on its id.
+   *
+   */
   public void removeSnapshot(String id) {
     this.snapshotList.remove(getSnapshot(id));
   }
 
-
+  /**
+   * Print out string version of album with the list of snapshots.
+   *
+   * @return String
+   */
+  @Override
+  public String toString() {
+    return "Printing Album\n"
+            + "List of Snapshots: \n" + snapshotList + "\n";
+  }
 }
