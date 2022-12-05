@@ -43,14 +43,6 @@ public class CanvasImpl implements ICanvas {
     return this.shapeList;
   }
 
-  /**
-   * Set list of shapes to empty.
-   *
-   */
-  @Override
-  public void resetShapeList() {
-    this.shapeList = new ArrayList<IShape>();
-  }
 
   /**
    * Set list of shapes to passed list.

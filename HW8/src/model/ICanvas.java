@@ -23,13 +23,6 @@ public interface ICanvas {
    */
   public ArrayList<IShape> getShapeList();
 
-
-  /**
-   * Set list of shapes to empty.
-   *
-   */
-  public void resetShapeList();
-
   /**
    * Set list of shapes to passed list.
    *

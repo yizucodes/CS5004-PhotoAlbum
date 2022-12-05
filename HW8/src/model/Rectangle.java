@@ -40,17 +40,6 @@ public class Rectangle extends AbstractShape {
             + this.getColor().getBlue() + ")" + "\n";
   }
 
-//  /**
-//   * Return deep copy of a rectangle.
-//   *
-//   * @return Rectangle
-//   */
-//  @Override
-//  public IShape copy() {
-//    Rectangle copyRectangle = new Rectangle(this.getId(), this.getName(), this.getPosition(),
-//            this.getDimension1(), this.getDimension2(), this.getColor());
-//    return copyRectangle;
-//  }
 }
 
 
