@@ -42,7 +42,7 @@ public interface ICanvas {
    * @return IShape
    */
   public IShape createShape(String id, String name, Point2D position,
-                            double dimension1, double position2, Color color, String shapeType) throws IllegalArgumentException;
+                            double dimension1, double dimension2, Color color, String shapeType) throws IllegalArgumentException;
 
   /**
    * Add shape to list.
