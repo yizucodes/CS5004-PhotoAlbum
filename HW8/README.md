@@ -24,4 +24,7 @@ once you save the screenshot, then a new snapshot is created, that new snapshot 
 - Unique identifier to check same shapes with same properties, but different `id`
 
 
+## `createSnapshot` adds to `snapshotList`
+- Did not separate the creation and addition to the list of snapshots as snapshots will always 
+have unique ids due to the timestamps at the moment of creation
 
