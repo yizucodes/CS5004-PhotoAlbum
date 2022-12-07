@@ -90,10 +90,14 @@ public class CanvasImpl implements ICanvas {
                             double dimension1, double dimension2, Color color, String shapeType) throws IllegalArgumentException {
 
     if (shapeType.equalsIgnoreCase("rectangle")) {
-      return new Rectangle(id, name, position, dimension1, dimension2, color);
+      Rectangle rect = new Rectangle(id, name, position, dimension1, dimension2, color);
+      this.shapeList.add(rect);
+      return rect;
     }
     else if(shapeType.equalsIgnoreCase("oval")) {
-      return new Oval(id, name, position, dimension1, dimension2, color);
+      Oval oval = new Oval(id, name, position, dimension1, dimension2, color);
+      this.shapeList.add(oval);
+      return oval;
     }
     else {
       throw new IllegalArgumentException(shapeType + " does not exist");
@@ -175,6 +179,6 @@ public class CanvasImpl implements ICanvas {
   public String toString() {
     return "Printing Canvas" + '\n' +
     "Canvas id: " + id + '\n' +
-            "List of shapes : " + shapeList + '\n';
+            "List of shapes : " + shapeList.toString() + '\n';
   }
 }
