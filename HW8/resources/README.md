@@ -38,3 +38,14 @@ have unique ids due to the timestamps at the moment of creation
 HTML addition of `name` attribute
 Using name for backend purposes as a best practice to send data to server
 `https://www.w3docs.com/snippets/html/what-is-the-difference-between-the-id-and-name-attributes.html`
+
+# Additions
+
+- Creation of `canvas` in `Album` constructor
+  - commit `85c66e9`
+
+# Bug fixes
+
+- Missed addition to `shapeList` in canvas after creation
+  - commit `ed9eb86`
+
