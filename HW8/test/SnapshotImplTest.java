@@ -46,8 +46,8 @@ public class SnapshotImplTest {
     rect1 = canvas1.createShape("2", "rect1", new Point2D.Double(0, 0),
             2, 2, new Color(1,1,1), "rectangle");
 
-    canvas1.addShape(oval1);
-    canvas1.addShape(rect1);
+    canvas1.createShape(oval1);
+    canvas1.createShape(rect1);
 
     canvas1snap = album.createSnapshot("Test for canvas1", canvas1);
 

@@ -105,7 +105,7 @@ public class CanvasImpl implements ICanvas {
    *
    */
   @Override
-  public void addShape(IShape shape) throws IllegalArgumentException {
+  public void createShape(IShape shape) throws IllegalArgumentException {
 
     if (shape == null) {
       throw new IllegalArgumentException("Shape cannot be null");

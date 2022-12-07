@@ -48,7 +48,7 @@ public interface ICanvas {
    * Add shape to list.
    *
    */
-  public void addShape(IShape shape);
+  public void createShape(IShape shape);
 
   /**
    * Remove a shape from canvas.

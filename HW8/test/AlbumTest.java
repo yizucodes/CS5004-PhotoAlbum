@@ -4,15 +4,11 @@ import org.junit.Test;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 
 import model.Album;
 import model.ICanvas;
 import model.IShape;
 import model.ISnapshot;
-import model.Rectangle;
-import model.Oval;
 
 /**
  * JUnit test class for the Album class.
@@ -45,8 +41,8 @@ public class AlbumTest {
     rect1 = canvas1.createShape("2", "rect1", new Point2D.Double(0, 0),
             2, 2, new Color(1,1,1), "rectangle");
 
-    canvas1.addShape(oval1);
-    canvas1.addShape(rect1);
+    canvas1.createShape(oval1);
+    canvas1.createShape(rect1);
 
     idExp = "2022-11-30T21:04:22.000275";
     timestampExp = "2022-11-30 21:04:22";
@@ -124,7 +120,7 @@ public class AlbumTest {
 
     ICanvas canvas2 = album.createCanvas("canvas2");
 
-    canvas2.addShape(canvas2.createShape("3", "canvas2rect3", new Point2D.Double(0, 0),
+    canvas2.createShape(canvas2.createShape("3", "canvas2rect3", new Point2D.Double(0, 0),
             2, 10, new Color(1,1,1), "rectangle"));
 
     ISnapshot snap2 = album.createSnapshot("canvas2 snap", canvas2);
@@ -224,7 +220,7 @@ public class AlbumTest {
     IShape shapeAdd = testCreateCanvas.createShape("2", "rect1", new Point2D.Double(0, 0),
             2, 2, new Color(1,1,1), "rectangle");
 
-    testCreateCanvas.addShape(shapeAdd);
+    testCreateCanvas.createShape(shapeAdd);
 
     assertEquals("Printing Canvas\n" +
             "Canvas id: testCreateCanvas\n" +
@@ -292,7 +288,7 @@ public class AlbumTest {
     IShape shapeAdd = testCreateCanvas.createShape("2", "rect1", new Point2D.Double(0, 0),
             2, 2, new Color(1,1,1), "rectangle");
 
-    testCreateCanvas.addShape(shapeAdd);
+    testCreateCanvas.createShape(shapeAdd);
 
     assertEquals("Printing Canvas\n" +
             "Canvas id: testCreateCanvas\n" +

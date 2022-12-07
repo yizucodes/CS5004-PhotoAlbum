@@ -38,8 +38,8 @@ public class CanvasImplTest {
     rect1 = canvas1.createShape("2", "rect1", new Point2D.Double(0, 0),
             2, 2, new Color(1,1,1), "rectangle");
 
-    canvas1.addShape(oval1);
-    canvas1.addShape(rect1);
+    canvas1.createShape(oval1);
+    canvas1.createShape(rect1);
 
   }
 
@@ -166,8 +166,8 @@ public class CanvasImplTest {
 
     IShape rectActual = canvas1.createShape("rect3", "rect1", new Point2D.Double(0, 0),
             2, 2, new Color(1,1,1), "RECTANGLE");
-    canvas1.addShape(ovalActual);
-    canvas1.addShape(rectActual);
+    canvas1.createShape(ovalActual);
+    canvas1.createShape(rectActual);
 
     String expectedOut = "[Name: oval1\n" +
             "Type: oval\n" +
@@ -209,7 +209,7 @@ public class CanvasImplTest {
     try {
       IShape ovalActual = canvas1.createShape("1", "ovalExpected", new Point2D.Double(0, 0),
               2, 2, new Color(1,1,1), "OVAL");
-      canvas1.addShape(ovalActual);
+      canvas1.createShape(ovalActual);
 
     }
     catch (IllegalArgumentException e) {
@@ -220,14 +220,14 @@ public class CanvasImplTest {
       IShape rectActual = canvas1.createShape("2", "rect1", new Point2D.Double(0, 0),
               2, 2, new Color(1,1,1), "RECTANGLE");
 
-      canvas1.addShape(rectActual);
+      canvas1.createShape(rectActual);
     }
     catch (IllegalArgumentException e) {
       illegalTestsPassed += 1;
     }
 
     try {
-      canvas1.addShape(null);
+      canvas1.createShape(null);
     }
     catch (IllegalArgumentException e) {
       illegalTestsPassed += 1;
