@@ -105,7 +105,7 @@ public class AlbumTest {
             "Height: 2.0\n" +
             "Color: (1,1,1)\n" +
             "]\n" +
-            "]",  album.getSnapshotList().toString());
+            "]", album.getSnapshotList().toString());
   }
 
   /**
