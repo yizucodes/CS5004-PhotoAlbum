@@ -17,7 +17,7 @@ public class Album {
    */
   public Album() {
     this.snapshotList = new ArrayList<ISnapshot>();
-    this.canvas = null;
+    this.canvas = new CanvasImpl("canvas");
   }
 
   /**
