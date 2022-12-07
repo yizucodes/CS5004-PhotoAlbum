@@ -33,3 +33,8 @@ have unique ids due to the timestamps at the moment of creation
 # How to run
 
 # Design Change from HW8
+
+
+HTML addition of `name` attribute
+Using name for backend purposes as a best practice to send data to server
+`https://www.w3docs.com/snippets/html/what-is-the-difference-between-the-id-and-name-attributes.html`
