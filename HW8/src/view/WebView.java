@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import model.Album;
+import model.ICanvas;
 import model.IShape;
 import model.ISnapshot;
 
@@ -16,15 +17,21 @@ public class WebView {
   public static void main(String[] args) {
 
     Album album = new Album();
-    album.createCanvas("canvas");
+    System.out.println("album: " + album);
 
-    Point2D position = new Point2D.Double(20, 20);
+    ICanvas canvas = album.getCanvas();
 
-    album.getCanvas().createShape("oval1", "oval1",position,50,50,
+
+    Point2D position = new Point2D.Double(0, 0);
+
+    Point2D position2 = new Point2D.Double(30, 30);
+
+    album.getCanvas().createShape("oval1", "oval1", position,50,50,
             new Color(10, 8, 8),"oval");
 
-    album.getCanvas().createShape("rect1", "rect1",position,50,50,
-            new Color(10, 8, 8),"rectangle");
+
+    album.getCanvas().createShape("rect1", "rect1",position2,50,50,
+            new Color(255, 8, 8),"rectangle");
 
     album.createSnapshot("snap 1", album.getCanvas());
 
@@ -34,9 +41,6 @@ public class WebView {
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
     }
-
-    album.getCanvas().createShape("oval2", "oval2",position,50,50,
-            new Color(10, 8, 8),"oval");
 
     album.createSnapshot("snap 2", album.getCanvas());
 
@@ -49,15 +53,16 @@ public class WebView {
 
   public void createWebView(Album album) {
 
-    File file = new File("file:///Users/yizu/Desktop/CS5004/CS5004-PhotoAlbum/HW8/resources/buildingsOut.html");
+    File file = new File("./resources/buildingsOut.html");
 
     String htmlBody = "<html>\n" +
             "    <head>\n" +
-            "        <title>Web View for SVG</title>\n" +
+            "        <title>Web View for Shapes</title>\n" +
             "        <style>\n" +
             "            .snapshot {\n" +
             "                border: 5px outset black;\n" +
             "                background-color: white;\n" +
+              "              padding: 10px;\n" +
             "            }\n" +
             "        </style>\n" +
             "    </head>\n" +
@@ -66,15 +71,17 @@ public class WebView {
     ArrayList<ISnapshot> snapList = album.getSnapshotList();
 
     for(ISnapshot snap : snapList) {
-      htmlBody = htmlBody + "\t\t<div class = " + " \"Snapshot\">\n" +
-              "\t\t\t<h2>"+ snap.getDescription() +" </h2>\n" +
+      htmlBody = htmlBody + "\t\t<div class=" + "\"snapshot\">\n" +
+              "\t\t\t<h2>"+ snap.getDescription() +"</h2>\n" +
               "\t\t\t<h2>"+ snap.getId() + "</h2>\n" +
               "\t\t\t\t<svg width=\"1000\" height=\"1000\">\n";
 
       ArrayList<IShape> shapeList = album.getCanvas().getShapeList();
 
-      for(IShape shape : shapeList) {
+      System.out.println("shapeList: " + shapeList);
 
+      for(IShape shape : shapeList) {
+        System.out.println("in for each for shapeList");
         String shapeType = shape.getClass().getSimpleName();
 
         String id = shape.getId();
@@ -111,8 +118,6 @@ public class WebView {
     }
     htmlBody = htmlBody + "\t</body>\n" +
             "</html>";
-
-    System.out.println(htmlBody);
 
     try {
       BufferedWriter buffWriter = new BufferedWriter(new FileWriter(file));
