@@ -7,8 +7,8 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 import model.Album;
+import model.ICanvas;
 import model.IShape;
-import model.ISnapshot;
 
 public class Controller {
   private static final int DEFAULT_X_HEIGHT = 1000;
@@ -31,6 +31,7 @@ public class Controller {
 
   // Instantiate model
   Album album = new Album();
+  ICanvas canvas = album.createCanvas("canvas");
 
 
   public Controller(File file, int maxHeight, int maxWidth) throws IllegalArgumentException, FileNotFoundException {
@@ -48,13 +49,18 @@ public class Controller {
     }
     this.file = file;
     this.maxHeight = maxHeight;
-    this.maxWidth = maxWidth;
+
   }
 
   // id and name are the same for this purpose
   // TODO: Check why not having static is ok
 //  public static void main(String[] args) {
-public void main(String[] args) {
+
+  // TODO: Make it read a file
+public void Control(String[] args) {
+
+    // Find current directory and pass that
+    File file = new File("filename.txt");
     String input = scan.nextLine().trim();
     String[] inputSplit = input.split(" ");
 
@@ -64,6 +70,7 @@ public void main(String[] args) {
     };
 
     if (inputSplit[0].equalsIgnoreCase("shape")) {
+
 
       Point2D position = new Point2D.Double(Double.parseDouble(inputSplit[INDEX_X_POS]), Double.parseDouble(inputSplit[INDEX_Y_POS]));
       String idAndName = inputSplit[INDEX_ID_NAME];
@@ -76,43 +83,42 @@ public void main(String[] args) {
       String shapeType = inputSplit[INDEX_SHAPE_TYPE];
 
       // Call model to create shape
-      IShape newShape = album.getCanvas().createShape(idAndName, idAndName, position, dim1, dim2, color, shapeType);
-      album.getCanvas().addShape(newShape);
+      IShape newShape = canvas.createShape(idAndName, idAndName, position, dim1, dim2, color, shapeType);
+      canvas.createShape(newShape);
     };
 
     if (inputSplit[0].equalsIgnoreCase("move")) {
       String idAndName = inputSplit[INDEX_ID_NAME];
-      IShape shape = album.getCanvas().getShape(idAndName);
+      IShape shape = canvas.getShape(idAndName);
       Point2D position = new Point2D.Double(Double.parseDouble(inputSplit[2]), Double.parseDouble(inputSplit[3]));
-      album.getCanvas().move(shape, position);
-
+      canvas.move(shape, position);
     }
 
   if (inputSplit[0].equalsIgnoreCase("resize")) {
     String idAndName = inputSplit[INDEX_ID_NAME];
-    IShape shape = album.getCanvas().getShape(idAndName);
+    IShape shape = canvas.getShape(idAndName);
 
     double dim1 = Double.parseDouble(inputSplit[2]);
     double dim2 = Double.parseDouble(inputSplit[3]);
 
-    album.getCanvas().scale(shape, dim1, dim2);
+    canvas.scale(shape, dim1, dim2);
   }
 
   if (inputSplit[0].equalsIgnoreCase("color")) {
     String idAndName = inputSplit[INDEX_ID_NAME];
-    IShape shape = album.getCanvas().getShape(idAndName);
+    IShape shape = canvas.getShape(idAndName);
 
     int red = Integer.parseInt(inputSplit[2]);
     int green = Integer.parseInt(inputSplit[3]);
     int blue = Integer.parseInt(inputSplit[4]);
     Color color = new Color(red, green, blue);
 
-    album.getCanvas().changeColor(shape, color);
+    canvas.changeColor(shape, color);
   }
 
     if (inputSplit[0].equalsIgnoreCase("remove")) {
       String idAndName = inputSplit[INDEX_ID_NAME];
-      album.getCanvas().removeShape(idAndName);
+      canvas.removeShape(idAndName);
     };
 
     if (inputSplit[0].equalsIgnoreCase("snapshot")) {
@@ -120,11 +126,17 @@ public void main(String[] args) {
       // Get all the words after the first one for description
       String description = input.substring(1, inputSplit.length - 1);
 
-      album.createSnapshot(description, album.getCanvas());
+      album.createSnapshot(description, canvas);
   }
 
 
   }
+
+//  public static void main(String[] args) {
+//    Controller controller = new Controller()
+//  }
+
+
 
 
 
