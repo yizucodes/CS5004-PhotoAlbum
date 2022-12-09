@@ -18,6 +18,9 @@ public class GraphicalView extends JFrame {
 
   private static final int WIDTH = 1000;
   private static final int HEIGHT = 1000;
+  private ISnapshot snap;
+  private Album album;
+  private int counter = 0; // Counter pointing to current index of snapshot displayed in view
 
   // TODO: Get timestamp from controller
   private JLabel tsLabel = new JLabel("Timestamp here");
@@ -116,17 +119,50 @@ public class GraphicalView extends JFrame {
     }
   }
 
+  private class NextSnapListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      counter++;
 
-  public static void main(String[] args) {
-    new GraphicalView();
+      // Pass list of snapshots
+      if (counter == album.getSnapshotList().size()) {
+        JOptionPane.showMessageDialog(frame, "Reached end of photo album");
+      }
+      showSnapshot();
+      updateLabel();
+
+    }
   }
-  /**
-   * Invoked when an action occurs.
-   *
-   * @param e the event to be processed
-   */
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    System.out.println("next page");
+
+  // TODO: Add this method to interface
+  public void showSnapshot() {
+    ArrayList<ISnapshot> snapList = album.getSnapshotList();
+
+    // Getting snapshot at index of counter
+    shapesPanel = new DrawPanel(snapList.get(counter));
+    add(shapesLabel);
+    this.setVisible(true);
+  }
+
+  // Update label when user toggles between snapshots
+  private void updateLabel() {
+    ISnapshot selectedSnap = album.getSnapshotList().get(counter);
+    shapesLabel.setText("");
+    String descText = selectedSnap.getId() + " " + selectedSnap.getDescription();
+    shapesLabel.setText(descText);
+    shapesLabel.setFont(new Font("SANS_SERIF", 1, 16));
+  }
+  public static void main(String[] args) {
+
+    Album album = new Album();
+    ICanvas canvas = album.getCanvas();
+    canvas.createShape("1", "oval1", new Point2D.Double(0, 0),
+            100, 100, new Color(1,1,1), "oval");
+
+    canvas.createShape("2", "rect1", new Point2D.Double(100, 0),
+            100, 100, new Color(1,1,1), "rectangle");
+    ISnapshot testSnap = album.createSnapshot("Test for canvas1", canvas);
+    new GraphicalView(album, testSnap);
+
   }
 }
