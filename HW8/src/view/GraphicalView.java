@@ -27,8 +27,10 @@ public class GraphicalView implements ActionListener {
   private JPanel shapesPanel = new JPanel();
   private JPanel topPanel = new JPanel();
 
-  public GraphicalView() {
-
+  public GraphicalView(Album album, ISnapshot snap) {
+    Objects.requireNonNull(snap); // require non null object
+    this.album = album;
+    this.snap = snap;
 
     frame.setSize(WIDTH, HEIGHT);
 
@@ -65,8 +67,46 @@ public class GraphicalView implements ActionListener {
     // 4. Set window to certain size
     frame.setVisible(true);
 
+    // TODO: Add shape to the views
+    DrawPanel drawPanel = new DrawPanel();
+    shapesPanel.add(drawPanel);
+
   }
 
+  class DrawPanel extends JPanel {
+    private ISnapshot dpSnap;
+    public DrawPanel(ISnapshot dpSnap) {
+      this.dpSnap = dpSnap;
+    }
+    public void paintComponent(Graphics g) {
+      super.paintComponent(g);
+      setBackground(Color.BLACK);
+
+      ArrayList<IShape> shapeList = snap.getCanvas().getShapeList();
+
+      System.out.println("shapeList " + shapeList);
+
+      for (IShape shape : shapeList) {
+        int posX = (int) Math.round(shape.getPosition().getX());
+        int posY = (int) Math.round(shape.getPosition().getY());
+        int dim1 = (int) Math.round(shape.getDimension1());
+        int dim2 = (int) Math.round(shape.getDimension2());
+        Color color = shape.getColor();
+
+        String shapeType = shape.getClass().getSimpleName();
+
+        if (shapeType.equalsIgnoreCase("rectangle")) {
+          System.out.println("drawing rect");
+          g.setColor(color);
+          g.fillRect(posX, posY, dim1, dim2);
+        } else if (shapeType.equalsIgnoreCase("oval")) {
+          System.out.println("drawing oval");
+          g.setColor(color);
+          g.fillRect(posX, posY, dim1, dim2);
+        }
+      }
+    }
+  }
 
 
   public static void main(String[] args) {
