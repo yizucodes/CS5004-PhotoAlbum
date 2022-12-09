@@ -3,10 +3,18 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.Objects;
 
 import javax.swing.*;
 
-public class GraphicalView implements ActionListener {
+import model.Album;
+import model.ICanvas;
+import model.IShape;
+import model.ISnapshot;
+
+public class GraphicalView extends JFrame {
 
   private static final int WIDTH = 1000;
   private static final int HEIGHT = 1000;
