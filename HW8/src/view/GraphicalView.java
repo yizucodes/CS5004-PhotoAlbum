@@ -49,9 +49,9 @@ public class GraphicalView extends JFrame {
 
     // Top panel for timestamp
     topPanel.add(tsLabel);
-
-    // Center panel for shapes
-    shapesPanel.add(shapesLabel);
+    // Center panel label for shapes
+//    shapesPanel.add(shapesLabel);
+    shapesPanel.setBackground(new Color(135, 206, 235));
 
     // Button panel
 
