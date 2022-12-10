@@ -21,6 +21,7 @@ public class GraphicalView extends JFrame {
   private int currSnapshotIndex = 0; // Counter pointing to current index of snapshot displayed in view
 
   // TODO: Get timestamp from controller
+  private DrawPanel currPanel;
   private JLabel tsLabel = new JLabel("Timestamp here");
 
   private JLabel shapesLabel = new JLabel("TODO: Shapes here");
@@ -45,7 +46,7 @@ public class GraphicalView extends JFrame {
 
     topPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-//    shapesPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+    shapesPanel.setBorder(BorderFactory.createEmptyBorder(100, 10, 10, 10));
 
     buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
@@ -76,12 +77,15 @@ public class GraphicalView extends JFrame {
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     // 3. Set title to window
     frame.setTitle("CS5004 Shapes Photo Album Viewer");
-    // 4. Set window to certain size
-    frame.setVisible(true);
 
-    // TODO: Add shape to the views
-    DrawPanel drawPanel = new DrawPanel(this.snap);
-    shapesPanel.add(drawPanel);
+
+    // Drawing shapes
+    currPanel = new DrawPanel(this.snap);
+    shapesPanel.add(currPanel);
+
+    // 4. Set window to certain size
+    // Always set visible last to show everything
+    frame.setVisible(true);
 
   }
 
@@ -171,8 +175,10 @@ public class GraphicalView extends JFrame {
     ICanvas canvas = album.getCanvas();
 
     canvas.createShape("1", "oval1", new Point2D.Double(200, 200),
-            1000, 1000, new Color(1,1,1), "oval");
+            100, 100, new Color(200,200,1), "oval");
 
+//    canvas.createShape("2", "rect1", new Point2D.Double(0, 0),
+//            1000, 1000, new Color(255,1,1), "rectangle");
 
 //    canvas.createShape("2", "oval2", new Point2D.Double(20, 100),
 //            100, 100, Color.RED, "oval");
