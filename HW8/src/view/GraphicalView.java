@@ -23,7 +23,7 @@ public class GraphicalView extends JFrame {
   private JComboBox dropdown;
 
   private DrawPanel currPanel;
-  private JLabel tsLabel = new JLabel("Timestamp here");
+  private JLabel tsLabel = new JLabel("");
 
   private JLabel shapesLabel = new JLabel("TODO: Shapes here");
   private JButton nextBtn = new JButton("Next Snapshot");
@@ -107,10 +107,10 @@ public class GraphicalView extends JFrame {
 
       currSnapshotIndex++;
 
-      shapesPanel.setVisible(false);
+//      shapesPanel.setVisible(false);
       currSnapshot = album.getSnapshotList().get(currSnapshotIndex);
       showSnapshot();
-      updateLabel();
+      updateTsLabel();
     }
   }
 
