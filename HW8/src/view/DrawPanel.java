@@ -23,7 +23,7 @@ class DrawPanel extends JPanel {
 
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-    setBackground(Color.BLACK);
+    setBackground(Color.WHITE);
 
     System.out.println(currSnapshot.getCanvas().toString());
 
