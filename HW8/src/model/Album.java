@@ -30,12 +30,17 @@ public class Album {
   public ISnapshot createSnapshot(String description, ICanvas canvas) {
 
     ICanvas copyCanvas = this.createCanvas(canvas.getId());
-    copyCanvas.setShapeList(canvas.getShapeList());
+    ArrayList<IShape> copyShapeList = new ArrayList<IShape>();
 
+    for (IShape shape: canvas.getShapeList()) {
+      IShape copyShape = shape.copy();
+      copyShapeList.add(copyShape);
+    }
+
+    copyCanvas.setShapeList(copyShapeList);
     ISnapshot newSnap = new SnapshotImpl(description, copyCanvas);
 
     this.snapshotList.add(newSnap);
-
     return newSnap;
   };
 
