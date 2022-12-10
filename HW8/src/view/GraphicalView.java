@@ -40,10 +40,12 @@ public class GraphicalView extends JFrame {
   private JPanel shapesPanel = new JPanel();
   private JPanel topPanel = new JPanel();
 
-  public GraphicalView(Album album, ISnapshot snap) {
-    Objects.requireNonNull(snap); // require non null object
+  public GraphicalView(Album album) {
+    Objects.requireNonNull(album); // require non null object
     this.album = album;
-    this.currSnapshot = snap;
+
+    System.out.println(album.toString());
+    this.currSnapshot = album.getSnapshotList().get(currSnapshotIndex);
 
     frame.setSize(WIDTH, HEIGHT);
 
@@ -103,7 +105,7 @@ public class GraphicalView extends JFrame {
       }
 
       currSnapshotIndex++;
-      
+
       shapesPanel.setVisible(false);
       currSnapshot = album.getSnapshotList().get(currSnapshotIndex);
       showSnapshot();
@@ -130,7 +132,6 @@ public class GraphicalView extends JFrame {
       updateLabel();
 
     }
-
   }
 
 
@@ -193,23 +194,28 @@ public class GraphicalView extends JFrame {
     Album album = new Album();
     ICanvas canvas = album.getCanvas();
 
-    canvas.createShape("1", "oval1", new Point2D.Double(200, 200),
+    Point2D position = new Point2D.Double(100, 0);
+
+    Point2D position2 = new Point2D.Double(30, 30);
+
+    canvas.createShape("1", "oval1", position,
             100, 100, new Color(200,200,1), "oval");
 
-//    canvas.createShape("2", "rect1", new Point2D.Double(0, 0),
-//            1000, 1000, new Color(255,1,1), "rectangle");
+    album.createSnapshot("First snap", canvas);
 
-//    canvas.createShape("2", "oval2", new Point2D.Double(20, 100),
-//            100, 100, Color.RED, "oval");
+    canvas.createShape("2", "rect1", position2,
+            300, 300, new Color(1,200,1), "rectangle");
 
-//    canvas.createShape("2", "rect1", new Point2D.Double(100, 0),
-//            100, 100, new Color(1,1,1), "rectangle");
-    ISnapshot testSnap = album.createSnapshot("Test for canvas1", canvas);
+    // Delay the timing of the snapshot so that it can be saved
+    try {
+      Thread.sleep(8);
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
 
-    canvas.createShape("2", "oval2", new Point2D.Double(200, 200),
-            100, 100, new Color(1,200,1), "oval");
-    ISnapshot testSnap2 = album.createSnapshot("Test for canvas2", canvas);
-    new GraphicalView(album, testSnap);
+    album.createSnapshot("Second snap", canvas);
+
+    new GraphicalView(album);
 
   }
 }
