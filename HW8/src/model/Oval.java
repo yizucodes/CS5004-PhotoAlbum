@@ -39,6 +39,14 @@ public class Oval extends AbstractShape {
             + this.getColor().getBlue() + ")" + "\n";
   }
 
+  /**
+   * Deep copy of shape.
+   */
+  @Override
+  public Oval copy() {
+    return new Oval(this.id, this.name, this.position, this.dimension1, this.dimension2, this.color);
+  }
+
 }
 
 

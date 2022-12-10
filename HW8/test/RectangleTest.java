@@ -1,9 +1,12 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.util.Objects;
 
 import model.Rectangle;
 
@@ -377,6 +380,18 @@ public class RectangleTest {
   @Test
   public void testGetColor() {
     assertEquals(new Color(1,1,1), rect1.getColor());
+  }
+
+  /**
+   * Test copy method and protected setter methods.
+   */
+  @Test
+  public void testCopy() {
+
+    Rectangle copyRect = rect1.copy();
+    assertTrue(Objects.deepEquals(copyRect, rect1));
+
+    assertFalse(Objects.deepEquals(rect1, rect2));
   }
 
   /**

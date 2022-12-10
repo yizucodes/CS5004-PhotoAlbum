@@ -92,4 +92,11 @@ public interface IShape {
    *
    */
   public int hashCode();
+
+
+  /**
+   * Deep copy of shape.
+   *
+   */
+  public IShape copy();
 }

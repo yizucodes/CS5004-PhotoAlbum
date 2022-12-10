@@ -242,4 +242,14 @@ public class AbstractShape implements IShape {
   public int hashCode() {
     return Objects.hash(getId(), getName(), getPosition(), getDimension1(), getDimension2(), getColor());
   }
+
+  /**
+   * Deep copy of shape.
+   */
+  @Override
+  public IShape copy() {
+    return null;
+  }
+
+
 }

@@ -40,6 +40,14 @@ public class Rectangle extends AbstractShape {
             + this.getColor().getBlue() + ")" + "\n";
   }
 
+  /**
+   * Deep copy of shape.
+   */
+  @Override
+  public Rectangle copy() {
+    return new Rectangle(this.id, this.name, this.position, this.dimension1, this.dimension2, this.color);
+  }
+
 }
 
 
