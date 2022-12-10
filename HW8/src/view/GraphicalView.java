@@ -100,17 +100,18 @@ public class GraphicalView extends JFrame {
   private class NextSnapListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-      currSnapshotIndex++;
-
-      shapesPanel.setVisible(false);
       // Pass list of snapshots
-      if (currSnapshotIndex == album.getSnapshotList().size()) {
+      if (currSnapshotIndex == album.getSnapshotList().size() - 1) {
         JOptionPane.showMessageDialog(frame, "Reached end of photo album");
         return;
       }
+
+      currSnapshotIndex++;
+      
+      shapesPanel.setVisible(false);
+      currSnapshot = album.getSnapshotList().get(currSnapshotIndex);
       showSnapshot();
       updateLabel();
-
     }
   }
 
@@ -118,14 +119,17 @@ public class GraphicalView extends JFrame {
   private class PrevSnapListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-      currSnapshotIndex--;
-
-      shapesPanel.setVisible(false);
       // Pass list of snapshots
-      if (currSnapshotIndex < 0) {
+      if (currSnapshotIndex == 0) {
         JOptionPane.showMessageDialog(frame, "No more snapshots before this one.");
         return;
       }
+
+      currSnapshotIndex--;
+
+      shapesPanel.setVisible(false);
+      // get current snapshot
+      currSnapshot = album.getSnapshotList().get(currSnapshotIndex);
       showSnapshot();
       updateLabel();
 
