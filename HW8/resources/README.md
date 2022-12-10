@@ -34,7 +34,6 @@ have unique ids due to the timestamps at the moment of creation
 
 # Design Change from HW8
 
-
 HTML addition of `name` attribute
 Using name for backend purposes as a best practice to send data to server
 `https://www.w3docs.com/snippets/html/what-is-the-difference-between-the-id-and-name-attributes.html`
@@ -43,6 +42,7 @@ Using name for backend purposes as a best practice to send data to server
 
 - Creation of `canvas` in `Album` constructor
   - commit `85c66e9`
+- Get the list of snapshot `id` via `getSnapshotIds` method for dropdown
 
 # Bug fixes
 
