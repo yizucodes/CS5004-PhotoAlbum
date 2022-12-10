@@ -1,5 +1,6 @@
 package model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -67,6 +68,29 @@ public class Album {
       }
     }
     return result;
+  }
+
+  /**
+   * Get snapshot ids as an array.
+   *
+   * @return ArrayList<String>
+   */
+  public ArrayList<String> getSnapshotIds(ArrayList<ISnapshot> snapshotList) throws IllegalArgumentException {
+    if (snapshotList == null) {
+      throw new IllegalArgumentException("Invalid shape id");
+    }
+
+    ArrayList<String> snapshotIds = new ArrayList<String>();
+    if (snapshotList.size() == 0) {
+      return snapshotIds;
+    }
+
+    for (int index = 0; index < this.snapshotList.size(); index++) {
+      String snapId = this.snapshotList.get(index).getId();
+      snapshotIds.add(snapId);
+    }
+
+    return snapshotIds;
   }
 
   /**

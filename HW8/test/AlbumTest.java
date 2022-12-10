@@ -35,14 +35,11 @@ public class AlbumTest {
     // Init objects with values
     canvas1 = album.createCanvas("canvas1");
 
-    oval1 = canvas1.createShape("1", "oval1", new Point2D.Double(0, 0),
+    oval1 = canvas1.createShape("10", "oval1", new Point2D.Double(0, 0),
             2, 2, new Color(1,1,1), "oval");
 
-    rect1 = canvas1.createShape("2", "rect1", new Point2D.Double(0, 0),
+    rect1 = canvas1.createShape("3", "rect1", new Point2D.Double(0, 0),
             2, 2, new Color(1,1,1), "rectangle");
-
-    canvas1.createShape(oval1);
-    canvas1.createShape(rect1);
 
     idExp = "2022-11-30T21:04:22.000275";
     timestampExp = "2022-11-30 21:04:22";
@@ -51,6 +48,11 @@ public class AlbumTest {
 
     canvas1snap.setId(idExp);
     canvas1snap.setTimestamp(timestampExp);
+
+    // Create multiple snapshots
+    album.createSnapshot("Test for canvas2", canvas1);
+
+    album.createSnapshot("Test for canvas3", canvas1);
 
   }
 
@@ -106,6 +108,14 @@ public class AlbumTest {
             "Color: (1,1,1)\n" +
             "]\n" +
             "]", album.getSnapshotList().toString());
+  }
+
+  /**
+   * Test getSnapshotIds method.
+   */
+  @Test
+  public void testGetSnapshotIds() {
+    assertEquals("[2022-11-30T21:04:22.000275, 2022-12-09T21:17:13.000841, 2022-12-09T21:17:13.000841]",   album.getSnapshotIds(album.getSnapshotList()));
   }
 
   /**
@@ -330,7 +340,7 @@ public class AlbumTest {
   @org.junit.Test
   public void testRemoveSnapshot() {
     album.removeSnapshot(idExp);
-    assertEquals("[]", album.getSnapshotList().toString());
+    assertEquals("", album.getSnapshotList().toString());
 
     album.createSnapshot("remaining snap", canvas1);
     assertEquals("[Printing Snapshots\n" +
