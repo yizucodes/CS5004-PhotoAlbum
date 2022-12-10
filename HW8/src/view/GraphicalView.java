@@ -48,7 +48,8 @@ public class GraphicalView extends JFrame {
     this.currSnapshot = album.getSnapshotList().get(currSnapshotIndex);
 
     frame.setSize(WIDTH, HEIGHT);
-
+    frame.setLayout(new BorderLayout());
+    // Borderlayout
     topPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
     shapesPanel.setBorder(BorderFactory.createEmptyBorder(100, 10, 10, 10));
