@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 import javax.swing.*;
@@ -58,21 +59,25 @@ public class GraphicalView extends JFrame {
 
     // Top panel label for timestamp
     topPanel.add(tsLabel);
+    updateTsLabel();
     // Center panel label for shapes
     shapesPanel.setBackground(new Color(135, 206, 235));
 
     // Button panel
-    buttonPanel.add(nextBtn);
-    nextBtn.addActionListener(new NextSnapListener());
+    buttonPanel.add(prevBtn);
+    prevBtn.addActionListener(new PrevSnapListener());
 
     // Dropdown
 //    buttonPanel.add(dropdownBtn);
 //    dropdownBtn.addActionListener(new DropdownListener());
     this.dropdown = dropdownMenu();
-    buttonPanel.add(dropdown);
+    buttonPanel.add(this.dropdown);
 
-    buttonPanel.add(prevBtn);
-    prevBtn.addActionListener(new PrevSnapListener());
+
+    buttonPanel.add(nextBtn);
+    nextBtn.addActionListener(new NextSnapListener());
+
+
     buttonPanel.add(quitBtn);
     quitBtn.addActionListener(new QuitListener());
 
@@ -87,8 +92,15 @@ public class GraphicalView extends JFrame {
     frame.setTitle("CS5004 Shapes Photo Album Viewer");
 
     // Drawing shapes
+//    currPanel = new DrawPanel(this.currSnapshot);
+//    currDrawPanel.setCurrSnapshot(this.currSnapshot);
+
     currPanel = new DrawPanel(this.currSnapshot);
-    shapesPanel.add(currPanel);
+    currPanel.setSize(100, 100);
+    currPanel.setBackground(Color.WHITE);
+//    currPanel.setSize(new Dimension(100, 100));
+//    currPanel.
+    shapesPanel.add(currPanel, BorderLayout.CENTER);
 
     // 4. Set window to certain size
     // Always set visible last to show everything
@@ -126,11 +138,11 @@ public class GraphicalView extends JFrame {
 
       currSnapshotIndex--;
 
-      shapesPanel.setVisible(false);
+//      shapesPanel.setVisible(false);
       // get current snapshot
       currSnapshot = album.getSnapshotList().get(currSnapshotIndex);
       showSnapshot();
-      updateLabel();
+      updateTsLabel();
 
     }
   }
@@ -148,42 +160,50 @@ public class GraphicalView extends JFrame {
   public void showSnapshot() {
 
     // Getting snapshot at index of currSnapshotIndex
-    currPanel = new DrawPanel(currSnapshot);
+//    currPanel = new DrawPanel(currSnapshot);
+    currPanel.draw(currSnapshot);
     shapesPanel.add(currPanel);
     shapesPanel.setVisible(true);
   }
 
   // Update label when user toggles between snapshots
-  private void updateLabel() {
+  private void updateTsLabel() {
     ISnapshot selectedSnap = album.getSnapshotList().get(currSnapshotIndex);
-    shapesLabel.setText("");
+    tsLabel.setText("");
     String descText = selectedSnap.getId() + " " + selectedSnap.getDescription();
-    shapesLabel.setText(descText);
-    shapesLabel.setFont(new Font("SANS_SERIF", 1, 16));
+    tsLabel.setText(descText);
+    tsLabel.setFont(new Font("SANS_SERIF", 1, 16));
   }
 
-  // TODO: Dropdown Listener
+//  // TODO: Dropdown Listener
   private class DropdownListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
       System.out.println("Showing dropdown");
+      System.out.println("selected index" + dropdownMenu().getSelectedIndex());
+
       currSnapshotIndex = dropdownMenu().getSelectedIndex();
 
-      shapesPanel.setVisible(false);
-      System.out.println("currSnapshotIndex " + currSnapshotIndex);
+      System.out.println("currSnapshotIndex after select " + currSnapshotIndex);
+
+      // shapesPanel.setVisible(false);
       String id = album.getSnapshotIds(album.getSnapshotList()).get(currSnapshotIndex);
-      System.out.println("id " + id);
+      System.out.println("sel id " + id);
 
       currSnapshot = album.getSnapshot(id);
       showSnapshot();
-      updateLabel();
+      updateTsLabel();
 
     }
   }
 
+
   private JComboBox dropdownMenu() {
     ArrayList<String> snapIds = album.getSnapshotIds(album.getSnapshotList());
+
+    System.out.println(Arrays.toString(snapIds.toArray()));
+
     JComboBox menu = new JComboBox(snapIds.toArray());
     menu.setPreferredSize(new Dimension(200, 80));
     menu.addActionListener(new DropdownListener());
