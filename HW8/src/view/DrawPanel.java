@@ -12,6 +12,7 @@ class DrawPanel extends JPanel {
   private ISnapshot currSnapshot;
   public DrawPanel(ISnapshot currSnapshot) {
     this.currSnapshot = currSnapshot;
+    this.setPreferredSize(new Dimension(600,600));
     setVisible(true);
   }
 
@@ -56,4 +57,8 @@ class DrawPanel extends JPanel {
       }
     }
   }
+
+
+
+
 }
