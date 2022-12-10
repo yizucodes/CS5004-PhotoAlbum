@@ -13,23 +13,13 @@ class DrawPanel extends JPanel {
   public DrawPanel(ISnapshot currSnapshot) {
     this.currSnapshot = currSnapshot;
     this.setPreferredSize(new Dimension(600,600));
-    setVisible(true);
-  }
-
-  // To update snapshot as user toggles between snapshots
-  public void setCurrSnapshot(ISnapshot currSnapshot) {
-    this.currSnapshot = currSnapshot;
   }
 
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
     setBackground(Color.WHITE);
 
-//    System.out.println(currSnapshot.getCanvas().toString());
-
     ArrayList<IShape> shapeList = currSnapshot.getCanvas().getShapeList();
-
-    System.out.println("shapeList " + shapeList);
 
     for (IShape shape : shapeList) {
       int posX = (int) Math.round(shape.getPosition().getX());
@@ -50,6 +40,12 @@ class DrawPanel extends JPanel {
       }
     }
   }
+
+  public void draw (ISnapshot snap) {
+    this.currSnapshot = snap;
+    this.repaint();
+  }
+
 
 
 
