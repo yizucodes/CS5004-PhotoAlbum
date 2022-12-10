@@ -71,7 +71,6 @@ public void Control(String[] args) {
 
     if (inputSplit[0].equalsIgnoreCase("shape")) {
 
-
       Point2D position = new Point2D.Double(Double.parseDouble(inputSplit[INDEX_X_POS]), Double.parseDouble(inputSplit[INDEX_Y_POS]));
       String idAndName = inputSplit[INDEX_ID_NAME];
       double dim1 = Double.parseDouble(inputSplit[INDEX_DIM1]);
@@ -125,9 +124,11 @@ public void Control(String[] args) {
 
       // Get all the words after the first one for description
       String description = input.substring(1, inputSplit.length - 1);
-
       album.createSnapshot(description, canvas);
+
   }
+
+  // TODO: At the end of the file, init the web view OR GUI based on user input
 
 
   }
