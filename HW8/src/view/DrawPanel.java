@@ -25,7 +25,7 @@ class DrawPanel extends JPanel {
     super.paintComponent(g);
     setBackground(Color.WHITE);
 
-    System.out.println(currSnapshot.getCanvas().toString());
+//    System.out.println(currSnapshot.getCanvas().toString());
 
     ArrayList<IShape> shapeList = currSnapshot.getCanvas().getShapeList();
 
@@ -41,18 +41,11 @@ class DrawPanel extends JPanel {
       String shapeType = shape.getClass().getSimpleName();
 
       if (shapeType.equalsIgnoreCase("rectangle")) {
-        System.out.println("drawing rect");
         g.setColor(color);
         g.fillRect(posX, posY, dim1, dim2);
       } else if (shapeType.equalsIgnoreCase("oval")) {
-        System.out.println("drawing oval");
         g.setColor(color);
-        System.out.println("color " + color);
-        System.out.println("posX " + posX);
 
-        System.out.println("posY " + posY);
-        System.out.println("dim1 " + dim1);
-        System.out.println("dim2 " + dim2);
         g.fillOval(posX, posY, dim1, dim2);
       }
     }

@@ -17,10 +17,8 @@ public class WebView {
   public static void main(String[] args) {
 
     Album album = new Album();
-    System.out.println("album: " + album);
 
     ICanvas canvas = album.getCanvas();
-
 
     Point2D position = new Point2D.Double(0, 0);
 
@@ -28,7 +26,6 @@ public class WebView {
 
     album.getCanvas().createShape("oval1", "oval1", position,50,50,
             new Color(10, 8, 8),"oval");
-
 
     album.getCanvas().createShape("rect1", "rect1",position2,50,50,
             new Color(255, 8, 8),"rectangle");
@@ -77,8 +74,6 @@ public class WebView {
               "\t\t\t\t<svg width=\"1000\" height=\"1000\">\n";
 
       ArrayList<IShape> shapeList = album.getCanvas().getShapeList();
-
-      System.out.println("shapeList: " + shapeList);
 
       for(IShape shape : shapeList) {
         System.out.println("in for each for shapeList");
