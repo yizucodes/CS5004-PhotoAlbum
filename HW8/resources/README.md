@@ -49,3 +49,5 @@ Using name for backend purposes as a best practice to send data to server
 - Missed addition to `shapeList` in canvas after creation
   - commit `ed9eb86`
 
+- Missed deep copy of shapes to pass in canvas as `shapeList` when doing a new snapshot in canvas after creation
+  - commit `47485a6`
