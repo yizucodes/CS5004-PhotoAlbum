@@ -21,6 +21,9 @@ public class GraphicalView extends JFrame {
   private int currSnapshotIndex = 0; // Counter pointing to current index of snapshot displayed in view
 
   // TODO: Get timestamp from controller
+
+  private JComboBox dropdown = new JComboBox();
+
   private DrawPanel currPanel;
   private JLabel tsLabel = new JLabel("Timestamp here");
 
@@ -29,7 +32,7 @@ public class GraphicalView extends JFrame {
 
   private JButton prevBtn = new JButton("Prev Snapshot");
 
-  private JButton selectBtn = new JButton("Select Snapshot (Dropdown)");
+  private JButton dropdownBtn = new JButton("Select Snapshot (Dropdown)");
 
   private JButton quitBtn = new JButton("Quit");
   private JFrame frame = new JFrame();
@@ -61,8 +64,8 @@ public class GraphicalView extends JFrame {
     // Button panel
     buttonPanel.add(nextBtn);
     nextBtn.addActionListener(new NextSnapListener());
-    buttonPanel.add(selectBtn);
-    selectBtn.addActionListener(new DropSelectSnapListener());
+    buttonPanel.add(dropdownBtn);
+    dropdownBtn.addActionListener(new DropdownListener());
     buttonPanel.add(prevBtn);
     prevBtn.addActionListener(new PrevSnapListener());
     buttonPanel.add(quitBtn);
@@ -78,10 +81,15 @@ public class GraphicalView extends JFrame {
     // 3. Set title to window
     frame.setTitle("CS5004 Shapes Photo Album Viewer");
 
-
     // Drawing shapes
     currPanel = new DrawPanel(this.snap);
     shapesPanel.add(currPanel);
+
+    // TODO: Dropdown for snapshot ids
+//    ArrayList<String> snapIds = album.getSnapshotIds(album.getSnapshotList());
+//    JComboBox menu = new JComboBox(snapIds.toArray());
+//
+//    buttonPanel.add(menu);
 
     // 4. Set window to certain size
     // Always set visible last to show everything
@@ -126,9 +134,10 @@ public class GraphicalView extends JFrame {
   }
 
   // TODO
-  private class DropSelectSnapListener implements ActionListener {
+  private class DropdownListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
+        buttonPanel.add(dropdown);
 //      currSnapshotIndex++;
 //
 //      shapesPanel.setVisible(false);
@@ -169,10 +178,19 @@ public class GraphicalView extends JFrame {
     shapesLabel.setFont(new Font("SANS_SERIF", 1, 16));
   }
 
+  private JComboBox dropdownMenu() {
+    ArrayList<String> snapIds = album.getSnapshotIds(album.getSnapshotList());
+    JComboBox menu = new JComboBox(snapIds.toArray());
+    menu.setPreferredSize(new Dimension(100, 80));
+    menu.setBackground(Color.BLUE);
+    return menu;
+  };
+
   public static void main(String[] args) {
 
     Album album = new Album();
     ICanvas canvas = album.getCanvas();
+
 
     canvas.createShape("1", "oval1", new Point2D.Double(200, 200),
             100, 100, new Color(200,200,1), "oval");
