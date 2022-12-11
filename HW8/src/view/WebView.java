@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import model.Album;
 import model.ICanvas;
@@ -49,7 +50,7 @@ public class WebView implements IView {
   }
 
   public void createWebView(Album album) {
-
+    Objects.requireNonNull(album);
     File file = new File("./resources/buildingsOut.html");
 
     String htmlBody = "<html>\n" +
