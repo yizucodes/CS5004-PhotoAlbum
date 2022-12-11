@@ -13,7 +13,7 @@ import model.ICanvas;
 import model.IShape;
 import model.ISnapshot;
 
-public class WebView {
+public class WebView implements IView {
   public static void main(String[] args) {
 
     Album album = new Album();
@@ -122,5 +122,10 @@ public class WebView {
       throw new RuntimeException(error);
     }
 
+  }
+
+  @Override
+  public void renderView() {
+    return;
   }
 }

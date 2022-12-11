@@ -14,7 +14,7 @@ import model.Album;
 import model.ICanvas;
 import model.ISnapshot;
 
-public class GraphicalView extends JFrame {
+public class GraphicalView extends JFrame implements IView {
   private static final int WIDTH = 1000;
   private static final int HEIGHT = 1000;
   private ISnapshot currSnapshot;
@@ -41,6 +41,11 @@ public class GraphicalView extends JFrame {
   private JPanel shapesPanel = new JPanel();
   private JPanel topPanel = new JPanel();
 
+  @Override
+  public void renderView() {
+    return;
+  }
+  
   public GraphicalView(Album album) {
     Objects.requireNonNull(album); // require non null object
     this.album = album;
@@ -107,6 +112,7 @@ public class GraphicalView extends JFrame {
     frame.setVisible(true);
 
   }
+
 
   private class NextSnapListener implements ActionListener {
     @Override
