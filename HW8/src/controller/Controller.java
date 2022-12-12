@@ -136,7 +136,7 @@ public void ParseFile() throws FileNotFoundException {
 
       if (inputSplit[0].equalsIgnoreCase("snapshot")) {
         String description;
-        // TODO: Check for empty description
+        // Check for empty description
         if(inputSplit.length == 1) {
           description = "";
         } else {
