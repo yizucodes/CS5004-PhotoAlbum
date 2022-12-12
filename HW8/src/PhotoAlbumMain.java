@@ -78,24 +78,16 @@ public class PhotoAlbumMain {
           if (terminalArgs.get(index).equalsIgnoreCase("-out")) {
             break;
           }
-
         }
-        out = new File(terminalArgs.get(index + 1));
-        if(terminalArgs.size() > REQUIRED_WEB_VIEW_ARGS) {
-          // Adding indices to get respected maximum size of window (x and y)
-          xMax = Integer.parseInt(terminalArgs.get(viewInd + INDEX_DISTANCE_XMAX));
-          yMax = Integer.parseInt(terminalArgs.get(viewInd + INDEX_DISTANCE_YMAX));
-        }
-      } else if(viewType.equalsIgnoreCase("graphical")) {
-        if(terminalArgs.size() > REQUIRED_GRAPHICAL_VIEW_ARGS) {
+    }
+      if(viewType.equalsIgnoreCase("graphical")) {
+        if(terminalArgs.size() >= REQUIRED_GRAPHICAL_VIEW_ARGS) {
           // Adding indices to get respected maximum size of window (x and y)
           xMax = Integer.parseInt(terminalArgs.get(viewInd + INDEX_DISTANCE_XMAX));
           yMax = Integer.parseInt(terminalArgs.get(viewInd + INDEX_DISTANCE_YMAX));
         }
       }
-    }
-
-    new Controller(inFile, xMax, yMax, album, out, viewType).ParseFile();
-
   }
+    new Controller(inFile, xMax, yMax, album, out, viewType).ParseFile();
+}
 }
