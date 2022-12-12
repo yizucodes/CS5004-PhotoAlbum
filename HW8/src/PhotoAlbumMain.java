@@ -28,7 +28,7 @@ public class PhotoAlbumMain {
   public static void main(String[] args) throws FileNotFoundException {
     // Using ArrayList to hold string arguments as terminal command input's size varies
 
-    ArrayList<String> arguments = (ArrayList<String>) Arrays.stream(args).collect(Collectors.toList());
+    ArrayList<String> terminalArgs = (ArrayList<String>) Arrays.stream(args).collect(Collectors.toList());
     File inFile = null;
     File out = null;
     String viewType = "";
@@ -36,61 +36,61 @@ public class PhotoAlbumMain {
     int yMax = -1;
     Album album = new Album();
 
-    if((!arguments.contains("-v") && !arguments.contains("-view") || !arguments.contains("-in"))) {
+    if((!terminalArgs.contains("-v") && !terminalArgs.contains("-view") || !terminalArgs.contains("-in"))) {
       System.exit(ERROR_STATUS);
     }
 
-    if(arguments.contains("-in")) {
+    if(terminalArgs.contains("-in")) {
       int index = 0;
       for(;index < args.length; index++) {
-        if(arguments.get(index).equalsIgnoreCase("-in")) {
+        if(terminalArgs.get(index).equalsIgnoreCase("-in")) {
           break;
         }
       }
-      inFile = new File(arguments.get(index + 1));
+      inFile = new File(terminalArgs.get(index + 1));
     }
 
-    if(arguments.contains("-out")) {
+    if(terminalArgs.contains("-out")) {
       int index = 0;
       for(;index < args.length; index++) {
-        if(arguments.get(index).equalsIgnoreCase("-out")) {
+        if(terminalArgs.get(index).equalsIgnoreCase("-out")) {
           break;
         }
       }
-      out = new File(arguments.get(index + 1));
+      out = new File(terminalArgs.get(index + 1));
     }
 
-    if(arguments.contains("-v") || arguments.contains("-view")) {
+    if(terminalArgs.contains("-v") || terminalArgs.contains("-view")) {
       int index = 0;
       for(;index < args.length; index++) {
-        if(arguments.get(index).equalsIgnoreCase("-v") || arguments.get(index).equalsIgnoreCase("-view")) {
+        if(terminalArgs.get(index).equalsIgnoreCase("-v") || terminalArgs.get(index).equalsIgnoreCase("-view")) {
           break;
         }
       }
       int viewInd = index;
-      viewType = arguments.get(index + 1);
+      viewType = terminalArgs.get(index + 1);
 
       if(viewType.equalsIgnoreCase("web")) {
-        if(!arguments.contains("-out")){
+        if(!terminalArgs.contains("-out")){
           System.exit(ERROR_STATUS);
         }
         for(;index < args.length; index++) {
-          if (arguments.get(index).equalsIgnoreCase("-out")) {
+          if (terminalArgs.get(index).equalsIgnoreCase("-out")) {
             break;
           }
 
         }
-        out = new File(arguments.get(index + 1));
-        if(arguments.size() > REQUIRED_WEB_VIEW_ARGS) {
+        out = new File(terminalArgs.get(index + 1));
+        if(terminalArgs.size() > REQUIRED_WEB_VIEW_ARGS) {
           // Adding indices to get respected maximum size of window (x and y)
-          xMax = Integer.parseInt(arguments.get(viewInd + INDEX_DISTANCE_XMAX));
-          yMax = Integer.parseInt(arguments.get(viewInd + INDEX_DISTANCE_YMAX));
+          xMax = Integer.parseInt(terminalArgs.get(viewInd + INDEX_DISTANCE_XMAX));
+          yMax = Integer.parseInt(terminalArgs.get(viewInd + INDEX_DISTANCE_YMAX));
         }
       } else if(viewType.equalsIgnoreCase("graphical")) {
-        if(arguments.size() > REQUIRED_GRAPHICAL_VIEW_ARGS) {
+        if(terminalArgs.size() > REQUIRED_GRAPHICAL_VIEW_ARGS) {
           // Adding indices to get respected maximum size of window (x and y)
-          xMax = Integer.parseInt(arguments.get(viewInd + INDEX_DISTANCE_XMAX));
-          yMax = Integer.parseInt(arguments.get(viewInd + INDEX_DISTANCE_YMAX));
+          xMax = Integer.parseInt(terminalArgs.get(viewInd + INDEX_DISTANCE_XMAX));
+          yMax = Integer.parseInt(terminalArgs.get(viewInd + INDEX_DISTANCE_YMAX));
         }
       }
     }
