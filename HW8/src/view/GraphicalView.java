@@ -11,6 +11,9 @@ import javax.swing.*;
 import model.Album;
 import model.ISnapshot;
 
+/**
+ * Class to represent graphical view with Java Swing.
+ */
 public class GraphicalView extends JFrame implements IView {
   private static final int WIDTH = 1000;
   private static final int HEIGHT = 1000;
@@ -37,7 +40,9 @@ public class GraphicalView extends JFrame implements IView {
   private JPanel topPanel = new JPanel();
 
 
-
+  /**
+   * Contructor for graphical view.
+   */
   public GraphicalView(Album album) {
     Objects.requireNonNull(album); // require non null object
     this.album = album;
@@ -45,7 +50,9 @@ public class GraphicalView extends JFrame implements IView {
 
   }
 
-
+  /**
+   * ActionListener for next snapshot button.
+   */
   private class NextSnapListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -63,7 +70,9 @@ public class GraphicalView extends JFrame implements IView {
     }
   }
 
-
+  /**
+   * ActionListener for previous snapshot button.
+   */
   private class PrevSnapListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -75,7 +84,6 @@ public class GraphicalView extends JFrame implements IView {
 
       currSnapshotIndex--;
 
-//      shapesPanel.setVisible(false);
       // get current snapshot
       currSnapshot = album.getSnapshotList().get(currSnapshotIndex);
       showSnapshot();
@@ -85,7 +93,9 @@ public class GraphicalView extends JFrame implements IView {
   }
 
 
-
+  /**
+   * ActionListener for quit button.
+   */
   private class QuitListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -93,6 +103,9 @@ public class GraphicalView extends JFrame implements IView {
     }
   }
 
+  /**
+   * Showing snapshot method.
+   */
   public void showSnapshot() {
 
     currPanel.draw(currSnapshot);
@@ -100,7 +113,9 @@ public class GraphicalView extends JFrame implements IView {
     shapesPanel.setVisible(true);
   }
 
-  // Update label when user toggles between snapshots
+  /**
+   * Method to update label when user toggles between snapshots.
+   */
   private void updateTsLabel() {
     ISnapshot selectedSnap = album.getSnapshotList().get(currSnapshotIndex);
     tsLabel.setText("");
@@ -109,7 +124,10 @@ public class GraphicalView extends JFrame implements IView {
     tsLabel.setFont(new Font("SANS_SERIF", 1, 16));
   }
 
-//  // TODO: Dropdown Listener
+  /**
+   * ActionListener for dropdown.
+   */
+//  // TODO: Dropdown Listener - Index remains at 0 for some reason...
   private class DropdownListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -124,6 +142,9 @@ public class GraphicalView extends JFrame implements IView {
     }
   }
 
+  /**
+   * Dropdown menu with timestamps of snapshots.
+   */
   private JComboBox dropdownMenu() {
     ArrayList<String> snapIds = album.getSnapshotIds(album.getSnapshotList());
 
@@ -133,6 +154,9 @@ public class GraphicalView extends JFrame implements IView {
     return menu;
   };
 
+  /**
+   * Create graphical view with components.
+   */
   @Override
   public void renderView() {
     this.currSnapshot = album.getSnapshotList().get(currSnapshotIndex);
@@ -179,8 +203,7 @@ public class GraphicalView extends JFrame implements IView {
     currPanel = new DrawPanel(this.currSnapshot);
     currPanel.setSize(100, 100);
     currPanel.setBackground(Color.WHITE);
-//    currPanel.setSize(new Dimension(100, 100));
-//    currPanel.
+
     shapesPanel.add(currPanel, BorderLayout.CENTER);
 
     // 4. Set window to certain size

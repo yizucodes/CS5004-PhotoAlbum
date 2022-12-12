@@ -11,12 +11,17 @@ import java.util.Objects;
 import model.Album;
 import model.IShape;
 import model.ISnapshot;
-
+/**
+ * WebView class to represent html web view.
+ */
 public class WebView implements IView {
 
   public WebView() {
   }
 
+  /**
+   * Method to create web view and write to file.
+   */
   public void createWebView(Album album) {
     Objects.requireNonNull(album);
     File file = new File("./resources/buildingsOut.html");

@@ -42,6 +42,9 @@ public class Controller {
   private int maxHeight;
   private int maxWidth;
 
+  /**
+   * Constructor for Controller.
+   */
   public Controller(File file, int maxWidth, int maxHeight, Album album, File out, String viewType)
           throws IllegalArgumentException, FileNotFoundException {
 
@@ -69,6 +72,9 @@ public class Controller {
 
   }
 
+  /**
+   * Read file and parse it to call methods in the model.
+   */
 public void ParseFile() throws FileNotFoundException {
 
 

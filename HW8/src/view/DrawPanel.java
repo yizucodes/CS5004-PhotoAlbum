@@ -8,13 +8,23 @@ import javax.swing.*;
 import model.IShape;
 import model.ISnapshot;
 
+/**
+ * Class to draw a panel for graphical view.
+ */
 class DrawPanel extends JPanel {
   private ISnapshot currSnapshot;
+
+  /**
+   * Constructor for DrawPanel.
+   */
   public DrawPanel(ISnapshot currSnapshot) {
     this.currSnapshot = currSnapshot;
     this.setPreferredSize(new Dimension(600,600));
   }
 
+  /**
+   * paintComponent to be added to frame of graphical view.
+   */
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
     setBackground(Color.WHITE);
@@ -41,13 +51,13 @@ class DrawPanel extends JPanel {
     }
   }
 
+  /**
+   * Method to handle automatic method of redrawing panels.
+   */
   public void draw (ISnapshot snap) {
     this.currSnapshot = snap;
     this.repaint();
   }
-
-
-
 
 
 }

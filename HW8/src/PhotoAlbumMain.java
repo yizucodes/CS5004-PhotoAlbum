@@ -82,7 +82,7 @@ public class PhotoAlbumMain {
     }
       if(viewType.equalsIgnoreCase("graphical")) {
         if(terminalArgs.size() >= REQUIRED_GRAPHICAL_VIEW_ARGS) {
-          // Adding indices to get respected maximum size of window (x and y)
+          // Adding indices to get respective maximum size of window (x and y) from terminal input
           xMax = Integer.parseInt(terminalArgs.get(viewInd + INDEX_DISTANCE_XMAX));
           yMax = Integer.parseInt(terminalArgs.get(viewInd + INDEX_DISTANCE_YMAX));
         }
