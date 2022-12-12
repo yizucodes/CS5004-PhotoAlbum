@@ -1,7 +1,6 @@
 package view;
 
-import java.awt.Color;
-import java.awt.geom.Point2D;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -10,42 +9,11 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import model.Album;
-import model.ICanvas;
 import model.IShape;
 import model.ISnapshot;
 
 public class WebView implements IView {
-  public static void main(String[] args) {
 
-    Album album = new Album();
-
-    ICanvas canvas = album.getCanvas();
-
-    Point2D position = new Point2D.Double(0, 0);
-
-    Point2D position2 = new Point2D.Double(30, 30);
-
-    album.getCanvas().createShape("oval1", "oval1", position,50,50,
-            new Color(10, 8, 8),"oval");
-
-    album.getCanvas().createShape("rect1", "rect1",position2,50,50,
-            new Color(255, 8, 8),"rectangle");
-
-    album.createSnapshot("snap 1", album.getCanvas());
-
-    // Delay the timing of the snapshot so that it can be saved
-    try {
-      Thread.sleep(8);
-    } catch (InterruptedException e) {
-      throw new RuntimeException(e);
-    }
-
-    album.createSnapshot("snap 2", album.getCanvas());
-
-    WebView view = new WebView();
-    view.createWebView(album);
-
-  }
   public WebView() {
   }
 
