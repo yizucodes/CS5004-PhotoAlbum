@@ -43,21 +43,17 @@ have unique ids due to the timestamps at the moment of creation
   - `-in ./resources/buildings.txt -v graphical 1000 1000`
 2. Repeat steps `4` and `5`
 
-## Design Change from HW8
+## Changes from HW8
 
-- HTML addition of `name` attribute
-  - Using name for backend purposes as a best practice to send data to server
-  `https://www.w3docs.com/snippets/html/what-is-the-difference-between-the-id-and-name-attributes.html`
-
-## Additions
+### Additions
 
 - Creation of `canvas` in `Album` constructor
-  - Reason: Creating an `Album` means creating a `canvas` as well 
+  - Reason: Creating an `Album` means creating a `canvas` as well
     - commit `85c66e9`
 - Get the list of snapshot `id` via `getSnapshotIds` method for dropdown
   - Reason: For dropdown in `GraphicalView`
 
-## Bug fixes
+### Bug fixes
 
 - Missed addition to `shapeList` in canvas after creation
   - commit `ed9eb86`
@@ -65,7 +61,12 @@ have unique ids due to the timestamps at the moment of creation
 - Missed deep copy of shapes to pass in canvas as `shapeList` when doing a new snapshot in canvas after creation
   - commit `47485a6`
 
+### Addition to Web View
+- HTML addition of `name` attribute
+  - Using name for backend purposes as a best practice to send data to server
+  `https://www.w3docs.com/snippets/html/what-is-the-difference-between-the-id-and-name-attributes.html`
+
 ## Sources
 [MVC Lecture Code Samples](https://github.khoury.northeastern.edu/kbagley/fall-2022-cs5004/tree/main/MVC_Lectures/src)
 
-## Thank you for your time!
+## Thank you for your time and guidance throughout the semester! Have a great winter break!
