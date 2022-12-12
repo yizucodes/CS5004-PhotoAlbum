@@ -9,7 +9,12 @@ import java.util.*;
 import model.Album;
 import model.ICanvas;
 import model.IShape;
+import view.GraphicalView;
+import view.WebView;
 
+/**
+ * Class representing the controller.
+ */
 public class Controller {
   private static final int DEFAULT_X_HEIGHT = 1000;
   private static final int DEFAULT_Y_WIDTH = 1000;
@@ -24,120 +29,132 @@ public class Controller {
   private static final int INDEX_GREEN = 8;
   private static final int INDEX_BLUE = 9;
 
-  static Scanner scan = new Scanner(System.in);
-  File file;
+  private Album album;
+  static Scanner scan;
+
+  // Input file
+  private File file;
+
+  // Output file
+  private File out;
+
+  private String viewType;
   private int maxHeight;
   private int maxWidth;
 
-  // Instantiate model
-  Album album = new Album();
-  ICanvas canvas = album.createCanvas("canvas");
-
-
-  public Controller(File file, int maxHeight, int maxWidth) throws IllegalArgumentException, FileNotFoundException {
+  public Controller(File file, int maxWidth, int maxHeight, Album album, File out, String viewType)
+          throws IllegalArgumentException, FileNotFoundException {
 
     if (file == null) {
-      throw new IllegalArgumentException("File cannot be null");
+      throw new IllegalArgumentException("Null file not allowed.");
     }
 
-    // Default if inputs are not valid based on prompt: "a default value of 1000 is used for both x (width) and y (height)";
-    if (maxHeight <= 0) {
-      maxHeight = DEFAULT_X_HEIGHT;
+    if (album == null) {
+      throw new IllegalArgumentException("Null album not allowed.");
     }
+
+    // Based on prompt: "a default value of 1000 is used for both x (width) and y (height)";
     if (maxWidth <= 0) {
       maxWidth = DEFAULT_Y_WIDTH;
     }
+    if (maxHeight <= 0) {
+      maxHeight = DEFAULT_X_HEIGHT;
+    }
     this.file = file;
+    this.album = album;
+    this.out = out;
+    this.viewType = viewType;
     this.maxHeight = maxHeight;
+    this.maxWidth = maxWidth;
 
   }
 
-  // id and name are the same for this purpose
-  // TODO: Check why not having static is ok
-//  public static void main(String[] args) {
+public void ParseFile() throws FileNotFoundException {
 
-  // TODO: Make it read a file
-public void Control(String[] args) {
 
-    // Find current directory and pass that
-    File file = new File("filename.txt");
-    String input = scan.nextLine().trim();
-    String[] inputSplit = input.split(" ");
+    scan = new Scanner(this.file);
 
-    // TODO: Check if it works - Ignore first line
-    if (inputSplit[0].equalsIgnoreCase("#")) {
-      scan.nextLine();
-    };
+    while (scan.hasNextLine()) {
+      String input = scan.nextLine().trim();
+      String[] inputSplit = input.split(" ");
+      ICanvas canvas = this.album.getCanvas();
 
-    if (inputSplit[0].equalsIgnoreCase("shape")) {
 
-      Point2D position = new Point2D.Double(Double.parseDouble(inputSplit[INDEX_X_POS]), Double.parseDouble(inputSplit[INDEX_Y_POS]));
-      String idAndName = inputSplit[INDEX_ID_NAME];
-      double dim1 = Double.parseDouble(inputSplit[INDEX_DIM1]);
-      double dim2 = Double.parseDouble(inputSplit[INDEX_DIM2]);
-      int red = Integer.parseInt(inputSplit[INDEX_RED]);
-      int green = Integer.parseInt(inputSplit[INDEX_GREEN]);
-      int blue = Integer.parseInt(inputSplit[INDEX_BLUE]);
-      Color color = new Color(red, green, blue);
-      String shapeType = inputSplit[INDEX_SHAPE_TYPE];
+      if (inputSplit[0].equalsIgnoreCase("#")) {
+        scan.nextLine();
+      };
 
-      // Call model to create shape
-      IShape newShape = canvas.createShape(idAndName, idAndName, position, dim1, dim2, color, shapeType);
-      canvas.createShape(newShape);
-    };
+      if (inputSplit[0].equalsIgnoreCase("shape")) {
 
-    if (inputSplit[0].equalsIgnoreCase("move")) {
-      String idAndName = inputSplit[INDEX_ID_NAME];
-      IShape shape = canvas.getShape(idAndName);
-      Point2D position = new Point2D.Double(Double.parseDouble(inputSplit[2]), Double.parseDouble(inputSplit[3]));
-      canvas.move(shape, position);
+        Point2D position = new Point2D.Double(Double.parseDouble(inputSplit[INDEX_X_POS]), Double.parseDouble(inputSplit[INDEX_Y_POS]));
+        String idAndName = inputSplit[INDEX_ID_NAME];
+        double dim1 = Double.parseDouble(inputSplit[INDEX_DIM1]);
+        double dim2 = Double.parseDouble(inputSplit[INDEX_DIM2]);
+        int red = Integer.parseInt(inputSplit[INDEX_RED]);
+        int green = Integer.parseInt(inputSplit[INDEX_GREEN]);
+        int blue = Integer.parseInt(inputSplit[INDEX_BLUE]);
+        Color color = new Color(red, green, blue);
+        String shapeType = inputSplit[INDEX_SHAPE_TYPE];
+
+        // Call model to create shape
+        canvas.createShape(idAndName, idAndName, position, dim1, dim2, color, shapeType);
+      };
+
+      if (inputSplit[0].equalsIgnoreCase("move")) {
+        String idAndName = inputSplit[INDEX_ID_NAME];
+        IShape shape = canvas.getShape(idAndName);
+        Point2D position = new Point2D.Double(Double.parseDouble(inputSplit[2]), Double.parseDouble(inputSplit[3]));
+        canvas.move(shape, position);
+      }
+
+      if (inputSplit[0].equalsIgnoreCase("resize")) {
+        String idAndName = inputSplit[INDEX_ID_NAME];
+        IShape shape = canvas.getShape(idAndName);
+
+        double dim1 = Double.parseDouble(inputSplit[2]);
+        double dim2 = Double.parseDouble(inputSplit[3]);
+
+        canvas.scale(shape, dim1, dim2);
+      }
+
+      if (inputSplit[0].equalsIgnoreCase("color")) {
+        String idAndName = inputSplit[INDEX_ID_NAME];
+        IShape shape = canvas.getShape(idAndName);
+
+        int red = Integer.parseInt(inputSplit[2]);
+        int green = Integer.parseInt(inputSplit[3]);
+        int blue = Integer.parseInt(inputSplit[4]);
+        Color color = new Color(red, green, blue);
+
+        canvas.changeColor(shape, color);
+      }
+
+      if (inputSplit[0].equalsIgnoreCase("remove")) {
+        String idAndName = inputSplit[INDEX_ID_NAME];
+        canvas.removeShape(idAndName);
+      };
+
+      if (inputSplit[0].equalsIgnoreCase("snapshot")) {
+        String description;
+        // TODO: Check for empty description
+        if(inputSplit.length == 1) {
+          description = "";
+        } else {
+          description = input.substring(1, inputSplit.length - 1);
+        }
+        // Get all the words after the first one for description
+        album.createSnapshot(description, canvas);
+      }
+
     }
 
-  if (inputSplit[0].equalsIgnoreCase("resize")) {
-    String idAndName = inputSplit[INDEX_ID_NAME];
-    IShape shape = canvas.getShape(idAndName);
-
-    double dim1 = Double.parseDouble(inputSplit[2]);
-    double dim2 = Double.parseDouble(inputSplit[3]);
-
-    canvas.scale(shape, dim1, dim2);
-  }
-
-  if (inputSplit[0].equalsIgnoreCase("color")) {
-    String idAndName = inputSplit[INDEX_ID_NAME];
-    IShape shape = canvas.getShape(idAndName);
-
-    int red = Integer.parseInt(inputSplit[2]);
-    int green = Integer.parseInt(inputSplit[3]);
-    int blue = Integer.parseInt(inputSplit[4]);
-    Color color = new Color(red, green, blue);
-
-    canvas.changeColor(shape, color);
-  }
-
-    if (inputSplit[0].equalsIgnoreCase("remove")) {
-      String idAndName = inputSplit[INDEX_ID_NAME];
-      canvas.removeShape(idAndName);
-    };
-
-    if (inputSplit[0].equalsIgnoreCase("snapshot")) {
-
-      // Get all the words after the first one for description
-      String description = input.substring(1, inputSplit.length - 1);
-      album.createSnapshot(description, canvas);
+    if (viewType.equalsIgnoreCase("web")) {
+      new WebView().createWebView(this.album);
+    } else if (viewType.equalsIgnoreCase("graphical")) {
+      new GraphicalView(this.album);
+    }
 
   }
-
-  // TODO: At the end of the file, init the web view OR GUI based on user input
-
-
-  }
-
-//  public static void main(String[] args) {
-//    Controller controller = new Controller()
-//  }
-
-
 
 
 
