@@ -77,7 +77,6 @@ public class WebView implements IView {
       ArrayList<IShape> shapeList = album.getCanvas().getShapeList();
 
       for(IShape shape : shapeList) {
-        System.out.println("in for each for shapeList");
         String shapeType = shape.getClass().getSimpleName();
 
         String id = shape.getId();
